@@ -28,8 +28,8 @@
 % header and footer customisation
 \pagestyle{fancy}                   % pagestyle
 \fancyhf{}                          % erase previous header and footer content
-\rhead{Insert title here}           % right side of header (Usually document or chapter title)
-\lhead{Francisco Luque Sánchez}     % left side of header (Usually name)
+\rhead{Método de Euler en SED}           % right side of header (Usually document or chapter title)
+\lhead{Métodos numéricos II}        % left side of header (Usually name)
 \chead{}                            % center of header (useless piece of shit :D)
 \rfoot{\thepage}                    % right side of footer (page number)
 \lfoot{}                            % left side of footer (empty)
@@ -41,13 +41,15 @@
 
 % Report title
 \title{
-    \\              % Title
-\large              % Subtitle
+    Método de Euler en sistemas de ecuaciones diferenciales \\              % Title
+    \large Métodos numéricos II              % Subtitle
 }
 
 % Own author header
 \author{
-        Francisco Luque \\
+        María del Mar Ruiz Martín \\
+        Antonio R. Moya Martín-Castaño \\
+        Francisco Luque Sánchez \\
         Doble Grado de Ingeniería Informática y Matemáticas\\
         Universidad de Granada - UGR\\
         18001 Granada, \underline{Spain}
@@ -55,7 +57,72 @@
 \date{\today}
 
 \begin{document}
+\maketitle
 
-% Report body
+\section{Introducción}
+
+\section{Descripción general de un sistema de ecuaciones diferenciales}
+
+Para comenzar, veamos lo que es una ecuación diferencial. Una ecuación diferencial es una igualdad en la que interviene una variable independiente ($t$), una variable dependiente ($x(t)$) y las sucesivas derivadas de la variable dependiente respecto de la independiente. En forma general, podemos escribir dicha ecuación de la siguiente forma:
+
+$$ F(t, x, x', ..., x^{n)}) = 0 $$
+
+Se define el orden de dicha ecuación diferencial como el mayor orden de derivación de la variable dependiente que aparece en dicha ecuación.\\
+
+Una solución de esta ecuación es un conjunto de funciones que satisfacen las condiciones de dicha ecuación.\\
+
+Asociado a esta ecuación diferencial, se define un problema de valores iniciales (PVI) como dicha ecuación diferencial junto con los $n$ valores siguientes. Fijado $t_0$:
+
+$$ x(t_0) = y_0, x'(t_0) = y_1, ..., x_{n-1}(t_0) = y_{n-1} $$
+
+Se dice que un PVI está bien planteado si existe solución, es única y depende de forma continua de los datos del problema.\\
+
+Pasamos ahora a definir el concepto de sistema de ecuaciones diferenciales. Un sistema de ecuaciones diferenciales es un conjunto de ecuaciones diferenciales en las que se ven implicadas una variable independiente, un conjunto de variables dependientes de la misma, y las sucesivas derivadas de dichas variables dependientes respecto de la independiente. En forma general, podemos escribir un sistema de ecuaciones diferenciales como sigue:
+
+$$
+\begin{cases}
+F_1(t, x_1, x_1', ..., x_1^{n_1)}, ..., x_m, x_m', ..., x_m^{n_m)}) = 0 \\
+F_2(t, x_1, x_1', ..., x_1^{n_1)}, ..., x_m, x_m', ..., x_m^{n_m)}) = 0 \\
+\vdots \\
+F_r(t, x_1, x_1', ..., x_1^{n_1)}, ..., x_m, x_m', ..., x_m^{n_m)}) = 0
+\end{cases}
+$$
+
+Al igual que para las ecuaciones diferenciales, la solución de un sistema de ecuaciones diferenciales está compuesto por un conjunto de ecuaciones que satisfacen las condiciones impuestas por las ecuaciones del sistema
+
+De nuevo, podemos definir un PVI asociado al sistema de ecuaciones anterior. Dicho PVI viene definido por el sistema de ecuaciones diferenciales más el siguiente conjunto de valores:\\
+
+//TODO: Introducir los valores.\\
+
+Se dice que un sistema de ecuaciones diferenciales está bien planteado si cumple las propiedades definidas previamente:
+
+\begin{itemize}
+\item $\exists$ solución
+\item Es única
+\item Depende de forma continua de las propiedades del problema
+\end{itemize}
+
+Durante el trabajo, dado que el método de Euler se aplica a ecuaciones y sistemas de primer orden, trabajaremos con este tipo de sistemas. Podemos escribir este tipo de sistemas de la siguiente manera:
+
+$$
+\begin{cases}
+F_1(t, x_1, ..., x_m) = \frac{\partial x_1}{\partial t} \\
+F_2(t, x_1, ..., x_m) = \frac{\partial x_2}{\partial t} \\
+\vdots \\
+F_m(t, x_1, ..., x_m) = \frac{\partial x_m}{\partial t}
+\end{cases}
+$$
+
+Y asociado a este sistema de ecuaciones, el PVI definido por el sistema anterior y el conjunto de valores:
+
+$$ x_1(t_0) = y_1, x_2(t_0) = y_2, ..., x_m(t_0) = y_m $$
+
+\section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
+
+En la sección anterior definimos el concepto de ecuación diferencial de orden superior y el de sistema de ecuaciones diferenciales. Veamos ahora cómo reescribir 
+
+\section{Método de Euler para sistemas de ecuaciones diferenciales}
+
+\section{Estudio del error y análisis de la convergencia del método}
 
 \end{document}
