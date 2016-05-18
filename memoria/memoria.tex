@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Exercises template
+%
+% Author: Francisco Luque Sánchez (@pacron on github)
+%
+% Feel free to download, use and share this template :)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt]{article}       % class document and font size
+\usepackage[utf8]{inputenc}         % allowance of accents (spanish writing)
+
+% packages for math fonts
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+\usepackage{fancyhdr}               % fancy header: customize your header
+\usepackage{geometry}               % set margins in easy way
+
+\geometry{a4paper, margin=1in}      % set 1 inch in every margin
+
+% creation of \qed command to add a black square at the end of line
+\newcommand*{\qed}{\hfill\ensuremath{\blacksquare}}
+
+% header and footer customisation
+\pagestyle{fancy}                   % pagestyle
+\fancyhf{}                          % erase previous header and footer content
+\rhead{Insert title here}           % right side of header (Usually document or chapter title)
+\lhead{Francisco Luque Sánchez}     % left side of header (Usually name)
+\chead{}                            % center of header (useless piece of shit :D)
+\rfoot{\thepage}                    % right side of footer (page number)
+\lfoot{}                            % left side of footer (empty)
+\cfoot{}                            % again a center
+
+% Change the tolerance of hyphenation tool
+\pretolerance=2000
+\tolerance=3000
+
+% Report title
+\title{
+    \\              % Title
+\large              % Subtitle
+}
+
+% Own author header
+\author{
+        Francisco Luque \\
+        Doble Grado de Ingeniería Informática y Matemáticas\\
+        Universidad de Granada - UGR\\
+        18001 Granada, \underline{Spain}
+}
+\date{\today}
+
+\begin{document}
+
+% Report body
+
+\end{document}
