@@ -90,8 +90,7 @@ $$
 
 Al igual que para las ecuaciones diferenciales, la solución de un sistema de ecuaciones diferenciales está compuesto por un conjunto de ecuaciones que satisfacen las condiciones impuestas por las ecuaciones del sistema.\\
 
-De nuevo, podemos definir un PVI asociado al sistema de ecuaciones anterior. Dicho PVI viene definido por el sistema de ecuaciones diferenciales más el siguiente conjunto de valores:\\
-
+De nuevo, podemos definir un PVI asociado al sistema de ecuaciones anterior. Dicho PVI viene definido por el sistema de ecuaciones diferenciales más el siguiente conjunto de valores:
 $$ x_1(t_0) = y_{10}, ..., x_1^{n_1-1)}(t_0) = y_{1n_1-1}, ..., x_m(t_0) = y_{m0}, ..., x_1^{n_m-1)}(t_0) = y_{mn_m-1} $$
 
 Se dice que un sistema de ecuaciones diferenciales está bien planteado si cumple las propiedades definidas previamente:
@@ -119,7 +118,23 @@ $$ x_1(t_0) = y_1, x_2(t_0) = y_2, ..., x_m(t_0) = y_m $$
 
 \section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
 
-En la sección anterior definimos el concepto de ecuación diferencial de orden superior y el de sistema de ecuaciones diferenciales. Veamos ahora cómo reescribir 
+En la sección anterior definimos el concepto de ecuación diferencial de orden superior y el de sistema de ecuaciones diferenciales. Veamos ahora cómo reescribir una ecuación diferencial de orden $n$ en un sistema de ecuaciones diferenciales en el que se tienen $n$ ecuaciones diferenciales de primer orden. Este paso es necesario para poder aplicar posteriormente el método de Euler, ya que este método sólo puede ser aplicado a ecuaciones diferenciales de primer orden. Veamos entonces esta forma de reescribir las ecuaciones diferenciales de orden superior. Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Podemos escribir el siguiente sistema de ecuaciones diferenciales, cuya solución es equivalente a la de la ecuación anterior. Tomamos los siguientes cambios de variable:
+
+$$y_0 = x, y_1 = x', y_2 = x'', \dots, y_{n-1} = x^{n-1)}$$
+
+Entonces, la solución de $y_0$ para el siguiente sistema de ecuaciones siguiente es la solución de la ecuación diferencial inicial:
+
+$$
+\begin{cases}
+y_0' = x' = y_1\\
+y_1' = x'' = y_2\\
+\vdots\\
+y_{n-2}' = x^{n-1)} = y_{n-1}\\
+y_{n-1}' = x^{n)} = F(t, y_1, y_2, \dots, y_{n-1})
+\end{cases}
+$$
+
+Una vez convertida la ecuación en el sistema anterior, estamos en condiciones de aplicar el método de Euler para resolverlo.
 
 \section{Método de Euler para sistemas de ecuaciones diferenciales}
 
