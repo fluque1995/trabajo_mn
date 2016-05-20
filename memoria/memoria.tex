@@ -11,6 +11,7 @@
 
 \documentclass[12pt]{article}       % class document and font size
 \usepackage[utf8]{inputenc}         % allowance of accents (spanish writing)
+\usepackage{indentfirst}
 
 % packages for math fonts
 \usepackage{amsmath}
@@ -61,6 +62,10 @@
 
 \section{Introducción}
 
+En este trabajo explicaremos el método de Euler para resolución numérica de sistemas de ecuaciones diferenciales de primer orden. Este método es una extensión a sistemas de ecuaciones del método de Euler para ecuaciones diferenciales. Este método no es muy utilizado en la práctica, ya que por sus características no aporta soluciones lo suficientemente buenas. No obstante, sí que se suele explicar este método como introducción a los métodos de resolución numérica de ecuaciones diferenciales, dada su simplicidad. Además, es el más básico de lo que se conocen como \textit{métodos explícitos de resolución numérica de EDs}, y el más básico de los métodos de \textit{Runge-Kutta}. Por tanto, suele ser una buena estrategia introducir este método previo a la explicación de los métodos nombrados, ya que los mismos son una generalización de éste.\\
+
+El trabajo irá estructurado de la siguiente forma. Primero, daremos una descripción general del concepto de sistema de ecuaciones diferenciales, ya que será el objeto sobre el que trabajaremos. Concretamente, nos centraremos en sistemas de ecuaciones diferenciales de primer orden. Tras esto, veremos cómo podemos transformar una ecuación diferencial de orden superior en un sistema de ecuaciones diferenciales de primer orden, con el fin de tratar una ecuación diferencial de orden superior con el método de Euler. Posteriormente, explicaremos el método de Euler y su aplicación a los sistemas de ecuaciones diferenciales. Completaremos este apartado con la resolución de dos ejemplos con este método. Por un lado, resolveremos un sistema de ecuaciones diferenciales de primer orden aplicando el método directamente, y por otro, tomaremos una ecuación de orden superior, la convertiremos en un sistema de ecuaciones, y resolveremos dicho sistema con el método nuevamente.\\
+
 \section{Descripción general de un sistema de ecuaciones diferenciales}
 
 Para comenzar, veamos lo que es una ecuación diferencial. Una ecuación diferencial es una igualdad en la que interviene una variable independiente ($t$), una variable dependiente ($x(t)$) y las sucesivas derivadas de la variable dependiente respecto de la independiente. En forma general, podemos escribir dicha ecuación de la siguiente forma:
@@ -105,10 +110,10 @@ Durante el trabajo, dado que el método de Euler se aplica a ecuaciones y sistem
 
 $$
 \begin{cases}
-F_1(t, x_1, ..., x_m) = \frac{\partial x_1}{\partial t} \\
-F_2(t, x_1, ..., x_m) = \frac{\partial x_2}{\partial t} \\
+F_1(t, x_1, ..., x_m) = \frac{d x_1}{d t} \\
+F_2(t, x_1, ..., x_m) = \frac{d x_2}{d t} \\
 \vdots \\
-F_m(t, x_1, ..., x_m) = \frac{\partial x_m}{\partial t}
+F_m(t, x_1, ..., x_m) = \frac{d x_m}{d t}
 \end{cases}
 $$
 
