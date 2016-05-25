@@ -255,4 +255,27 @@ Como ya hemos dicho antes, se define el error local como el que se produce en un
 
 \section{Ejemplos y ejercicio resueltos}
 
+En primer lugar vamos a realizar el paso de una ecuación diferencial de orden superior a un sistema, sobre el cual posteriormente podremos aplicar el método de Euler para sistemas. Para ejemplificar el proceso vamos a usar el siguiente problema de valores iniciales: 
+
+$$
+x''' = 2x'' - 2x'     % x(t) = e^tcos(t)
+$$
+$$
+x(0)=1, x'(0)=1, x''(0)=0
+$$
+
+Realizamos el cambio de variable indicado en la sección \textit{Ecuaciones diferenciales de orden superior y reescritura como sistemas}:
+
+$$
+\begin{cases}
+y_0' = x' = y_1\\
+y_1' = x'' = y_2\\
+y_2' = x''' = 2y_2 - 2y_1
+\end{cases}
+$$
+
+A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,1] y una longitud de paso h = 0.1.
+
+
+
 \end{document}
