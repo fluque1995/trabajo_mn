@@ -177,7 +177,13 @@ $$
 y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + O(h^2).
 $$
 
-De este modo el método de Euler construye un $w_i \approx y(t_i)$
+De este modo el método de Euler construye un $w_i \approx y(t_i)$ para cada $i=1,...,N$
+$$
+\begin{cases}
+w_0=y_0\\
+w_{i+1}=w_i + hf(t_i,w_i)
+\end{cases}
+$$
 
 \section{Estudio del error y análisis de la convergencia del método}
 
@@ -192,6 +198,8 @@ Antes de comenzar con el estudio del error, comenzaremos definiendo los tipos de
 Estudiemos ahora los errores definidos en el método de Euler aplicado a sistemas de ecuaciones diferenciales.
 
 \subsection{Error local}
+
+Como ya hemos dicho antes, se define el error local como el que se produce en un paso del algoritmo, suponiendo que el valor del que partimos $(t_i, x_i)$
 
 \section{Ejemplos y ejercicio resueltos}
 
