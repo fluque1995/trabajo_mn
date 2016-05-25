@@ -146,15 +146,11 @@ Una vez convertida la ecuación en el sistema anterior, estamos en condiciones d
 
 \section{Método de Euler para sistemas de ecuaciones diferenciales}
 
-Recordemos primero el método de Euler para un problema de valores iniciales (PVI) bien planteado. Si tomamos N puntos equidistantes en un intervalo [a, b], de forma que para i=0,...,N:
-$$
-t_i=a+ih
-$$
-$$
-h=(b-a)/N
+Recordemos primero el método de Euler para un problema de valores iniciales (PVI) bien planteado. Si tomamos puntos en el intervalo [a,b] y un N natural, de forma que $h=(a+b)/N$. Para cada i=0,...,N, los puntos serían
+$$ 
+t_i=a+ih;
 $$
 y dado el PVI:
-
 $$
 \begin{cases}
 y'(t)=f(t,y(t)) \\ 
@@ -188,6 +184,62 @@ w_{i+1}=w_i + hf(t_i,w_i)
 \end{cases}
 $$
 
+Para el caso de sistemas de ecuaciones diferenciales de primer orden:
+$$
+\begin{cases}
+x_1'=F_1(t,x_1(t),...,x_n(t)) \\
+\vdots\\
+x_n'=F_n(t,x_1(t),...,x_n(t))
+\end{cases}
+$$;
+
+tenemos que para cada $j=1,...,n$, podemos hacer una aproximación de $w_{i,j} \approx x_j(t_i)$ de forma que:
+$$
+\begin{cases}
+w_{0,j}=x_{j,0} \\
+w_{i+1,j}=w_{i,j}+ hF_j(t_i,w_{i,j})
+\end{cases}
+$$
+
+De este modo, escribiendo el sistema con la siguiente notación matricial:
+$$
+X'(t)=F(t,X(t)),
+$$
+donde X(t) es de la forma:
+
+\begin{equation*}
+X(t)=\begin{bmatrix}
+	x_1(t) \\
+	\vdots \\
+	x_n(t)
+	\end{bmatrix},
+\end{equation*}
+y F(t,X(t)):
+\begin{equation*}
+F(t,X(t))=\begin{bmatrix}
+F_1(t,x_1(t),...,x_n(t)) \\
+\vdots \\
+F_n(t,x_n(t),...,x_n(t))
+\end{bmatrix};
+\end{equation*}
+
+podemos expresar una aproximación $W_i \approx X(t_i)$ de a siguiente manera:
+$$
+\begin{cases}
+W_0=X(t_0)\\
+W_{i+1}=W_i + hF(t_i,W_i)
+\end{cases}
+$$
+donde $W_i$ es de la forma:
+
+\begin{equation*}
+W_i=\begin{bmatrix}
+w_1(t) \\
+\vdots \\
+w_n(t)
+\end{bmatrix},
+\end{equation*}
+
 \section{Estudio del error y análisis de la convergencia del método}
 
 Antes de comenzar con el estudio del error, comenzaremos definiendo los tipos de errores que se pueden encontrar cuando se utilizan métodos numéricos para resolución de ecuaciones diferenciales:
@@ -216,5 +268,28 @@ Supongamos que tenemos la el valor exacto para un determinado $t_i$, es decir, t
 \end{proof}
 
 \section{Ejemplos y ejercicio resueltos}
+
+En primer lugar vamos a realizar el paso de una ecuación diferencial de orden superior a un sistema, sobre el cual posteriormente podremos aplicar el método de Euler para sistemas. Para ejemplificar el proceso vamos a usar el siguiente problema de valores iniciales: 
+
+$$
+x''' = 2x'' - 2x'     % x(t) = e^tcos(t)
+$$
+$$
+x(0)=1, x'(0)=1, x''(0)=0
+$$
+
+Realizamos el cambio de variable indicado en la sección \textit{Ecuaciones diferenciales de orden superior y reescritura como sistemas}:
+
+$$
+\begin{cases}
+y_0' = x' = y_1\\
+y_1' = x'' = y_2\\
+y_2' = x''' = 2y_2 - 2y_1
+\end{cases}
+$$
+
+A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,1] y una longitud de paso h = 0.1.
+
+
 
 \end{document}
