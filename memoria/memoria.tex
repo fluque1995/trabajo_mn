@@ -191,7 +191,7 @@ x_1'=F_1(t,x_1(t),...,x_n(t)) \\
 \vdots\\
 x_n'=F_n(t,x_1(t),...,x_n(t))
 \end{cases}
-$$;
+$$
 
 tenemos que para cada $j=1,...,n$, podemos hacer una aproximación de $w_{i,j} \approx x_j(t_i)$ de forma que:
 $$
@@ -203,7 +203,7 @@ $$
 
 De este modo, escribiendo el sistema con la siguiente notación matricial:
 $$
-X'(t)=F(t,X(t)),
+X'(t)=F(t,X(t))
 $$
 donde X(t) es de la forma:
 
@@ -212,7 +212,7 @@ X(t)=\begin{bmatrix}
 	x_1(t) \\
 	\vdots \\
 	x_n(t)
-	\end{bmatrix},
+	\end{bmatrix}
 \end{equation*}
 y F(t,X(t)):
 \begin{equation*}
@@ -220,7 +220,7 @@ F(t,X(t))=\begin{bmatrix}
 F_1(t,x_1(t),...,x_n(t)) \\
 \vdots \\
 F_n(t,x_n(t),...,x_n(t))
-\end{bmatrix};
+\end{bmatrix}
 \end{equation*}
 
 podemos expresar una aproximación $W_i \approx X(t_i)$ de a siguiente manera:
@@ -234,10 +234,10 @@ donde $W_i$ es de la forma:
 
 \begin{equation*}
 W_i=\begin{bmatrix}
-w_1(t) \\
+w_1(t_i) \\
 \vdots \\
-w_n(t)
-\end{bmatrix},
+w_n(t_i)
+\end{bmatrix}
 \end{equation*}
 
 \section{Estudio del error y análisis de la convergencia del método}
@@ -254,7 +254,7 @@ Estudiemos ahora los errores definidos en el método de Euler aplicado a sistema
 
 \subsection{Error local}
 
-Como ya hemos dicho antes, se define el error local como el que se produce en un paso del algoritmo, suponiendo que el valor del que partimos $(t_i, X_i)$ es un valor real de la ecuación. Entonces, tenemos que el error local cometido en la iteración $i+1$ lo podemos expresar como $E_{i+1} = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Veamos cómo 
+Como ya hemos dicho antes, se define el error local como el que se produce en un paso del algoritmo, suponiendo que el valor del que partimos $(t_i, X_i)$ es un valor real del sistema de ecuaciones. Entonces, tenemos que el error local cometido en la iteración $i+1$ lo podemos expresar como $E_{i+1} = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Veamos cómo 
 
 \begin{theorem} Error local del método de Euler.\\
 El error local para el método de Euler es $O(h^2)$, donde $h$ es el tamaño del paso que hemos elegido para aplicar el método ($h=(b-a)/N$).
@@ -263,7 +263,28 @@ El error local para el método de Euler es $O(h^2)$, donde $h$ es el tamaño del
 \begin{proof}
 Veamos la demostración de dicho resultado. Tomamos el PVI asociado al sistema de ecuaciones diferenciales:
 $$ X' = F(t, X),\, X(t_0) = X_0 $$
-Supongamos que tenemos la el valor exacto para un determinado $t_i$, es decir, tenemos $(t_i, X_i)$ exacto. Entonces, el error local para la siguiente iteración es $E_{i+1} = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$
+Supongamos que tenemos la el valor exacto para un determinado $t_i$, es decir, tenemos $(t_i, X_i)$ exacto. Entonces, el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Tomando cada una de las componentes por separado, y expresando $x_j(t_{i+1}), j = 1, ..., n$ usando su polinomio de Taylor centrado en $t_i$ tenemos:
+$$ x_j(t_{i+1}) = x_j(t_i) + h*x'_j(t_i) + \frac{h^2}{2}*x''_j(t_i) + \frac{h^3}{3!}*x'''_j(t_i) + ... $$
+Donde $h = t_{i+1} - t_i$. Con el método de Euler, la aproximación que obtenemos para $x_j(t_i) = \omega_{i+1, j}$ es:
+$$ \omega_{i+1, j} = x_j(t_i) + h*f_j(t_i, x_1, ..., x_n) = x_j(t_i) + h*x'_j(t_i) $$
+Restando ambas expresiones, tenemos que para cada $x_j$, el error cometido en un paso del método es:
+$$ e_{i+1, j} = | x_j(t_{i+1}) - \omega_{i+1, j} | = \frac{h^2}{2}*x''_j(\xi_{i+1, j}),\, \xi_{i+1, j} \in [t_i, t_{i+1}] $$
+Tenemos entonces que el vector de los errores lo podemos expresar como sigue:
+
+\begin{equation*}
+E_{i+1}=\begin{bmatrix}
+e_{i+1, 1} \\
+\vdots \\
+e_{i+1, n}
+\end{bmatrix}=\begin{bmatrix}
+\frac{h^2}{2}*x''_1(\xi_{i+1, 1}) \\
+\vdots \\
+\frac{h^2}{2}*x''_n(\xi_{i+1, n})
+\end{bmatrix}
+\end{equation*}
+
+Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$
+
 \qed
 \end{proof}
 
@@ -272,7 +293,7 @@ Supongamos que tenemos la el valor exacto para un determinado $t_i$, es decir, t
 \subsection{Método de Euler para sistemas de ecuaciones}
 
 \subsection{Método de Euler para ecuaciones de orden superior}
-
+ 
 En primer lugar vamos a realizar el paso de una ecuación diferencial de orden superior a un sistema, sobre el cual posteriormente podremos aplicar el método de Euler para sistemas. Para ejemplificar el proceso vamos a usar el siguiente problema de valores iniciales: 
 
 $$
