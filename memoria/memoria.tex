@@ -19,6 +19,7 @@
 \usepackage{mathtools}
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}
+\newtheorem{lemma}[theorem]{Lema}
 \renewenvironment{proof}{{\noindent     \bfseries Demostración}\\}
 
 \usepackage{fancyhdr}               % fancy header: customize your header
@@ -257,14 +258,17 @@ Estudiemos ahora los errores definidos en el método de Euler aplicado a sistema
 Como ya hemos dicho antes, se define el error local como el que se produce en un paso del algoritmo, suponiendo que el valor del que partimos $(t_i, X_i)$ es un valor real del sistema de ecuaciones. Entonces, tenemos que el error local cometido en la iteración $i+1$ lo podemos expresar como $E_{i+1} = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Veamos cómo 
 
 \begin{theorem} Error local del método de Euler.\\
+
 El error local para el método de Euler es $O(h^2)$, donde $h$ es el tamaño del paso que hemos elegido para aplicar el método ($h=(b-a)/N$).
+
 \end{theorem}
 
 \begin{proof}
 Veamos la demostración de dicho resultado. Tomamos el PVI asociado al sistema de ecuaciones diferenciales:
 $$ X' = F(t, X),\, X(t_0) = X_0 $$
 Supongamos que tenemos la el valor exacto para un determinado $t_i$, es decir, tenemos $(t_i, X_i)$ exacto. Entonces, el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Tomando cada una de las componentes por separado, y expresando $x_j(t_{i+1}), j = 1, ..., n$ usando su polinomio de Taylor centrado en $t_i$ tenemos:
-$$ x_j(t_{i+1}) = x_j(t_i) + h*x'_j(t_i) + \frac{h^2}{2}*x''_j(t_i) + \frac{h^3}{3!}*x'''_j(t_i) + ... $$
+$$ x_j(t_{i+1}) = x_j(t_i) + h*x'_j(t_i) + \frac{h^2}{2}*x''_j(t_i) + \frac{h^3}{3!}*x'''_j(t_i) + ... = $$
+$$ = x_j(t_i) + h*x'_j(t_i) + \frac{h^2}{2}*x''_j(\xi_j) $$
 Donde $h = t_{i+1} - t_i$. Con el método de Euler, la aproximación que obtenemos para $x_j(t_i) = \omega_{i+1, j}$ es:
 $$ \omega_{i+1, j} = x_j(t_i) + h*f_j(t_i, x_1, ..., x_n) = x_j(t_i) + h*x'_j(t_i) $$
 Restando ambas expresiones, tenemos que para cada $x_j$, el error cometido en un paso del método es:
@@ -283,9 +287,83 @@ e_{i+1, n}
 \end{bmatrix}
 \end{equation*}
 
-Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$
-
+Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$\\
 \qed
+\end{proof}
+
+Una vez visto el error local que se comete con el método de Euler, pasamos a estudiar el error global que se comete.
+
+\subsection{Error global}
+
+Como ya dijimos en la introducción de este apartado, se define el error global como el error total cometido tras las $n$ iteraciones que se realizan del método. Aunque cabría esperar que el error cometido con el método fuese la suma de los errores que se cometen en cada una de las iteraciones, esto no es cierto. Esto se debe a que, en cada pasa, el error previo cometido se ve levemente incrementado. Pasamos a estudiar entonces dicho error. Necesitaremos de dos lemas previos, que usaremos luego en la demostración:
+
+\begin{lemma}
+Para toda $x \geq -1$ y para cualquier $m$ positiva, tenemos que $0 \leq (1 + x)^m \leq e^{mx}$
+\end{lemma}
+
+\begin{proof}
+Aplicamos el teorema de Taylor a $e^x$. Obtenemos:
+$$ e^x = 1 + x + \frac{1}{2}x^2e^\xi $$
+
+donde $0 < \xi < x$. Por tanto:
+$$ 0 \leq 1 + x \leq 1 + x + \frac{1}{2}x^2e^\xi = e^x $$ 
+y como $1 + x \geq 0$:
+$$ 0 \leq (1 + x)^m \leq (e^x)^m = e^{mx} $$
+\qed 
+\end{proof}
+
+\begin{lemma}
+Si $s$ y $t$ son números reales positivos, $\{a_i\}^k_{i=0}$ es una sucesión que satisface $ a_0 \geq -t/s$ y
+$$a_{i+1} \leq (1+s)a_i + t, \, \forall i=0, 1, ..., k$$
+entonces se tiene que
+$$a_{i+1} \leq e^{(i+1)s}\left( a_0 + \frac{t}{s}\right) - \frac{t}{s}$$
+\end{lemma}
+
+\begin{proof}
+Para un entero fijo $i$, la primera desigualdad del lema implica que:
+$$a_{i+1} \leq (1+s)*a_i + t \leq (a+s)[(1+s)a_{i-1} + t] + t \leq ...$$
+$$ ... \leq (1+s)^{i+1}a_0 + [1 + (1+s) + ... + (1+s)^i]t $$
+
+Por otro lado, tenemos que $1 + (1+s) + (1+s)^2 + ... + (1+s)^i$ es una serie geométrica de razón $(1+s)$, y que por tanto su suma vale:
+$$ \frac{1 - (1+s)^{i+1}}{1 - (1+s)} = \frac{1}{s}[(1+s)^{i+1} - 1]$$
+Por lo tanto
+$$a_{i+1} \leq (1+s)^{i+1}a_0 + \frac{(1+s)^{i+1} - 1}{s}t = (1+s)^{i+1}*\left(a_0 + \frac{t}{s}\right) - \frac{t}{s}$$
+y finalmente, usando el lema anterior con $x = 1+s$, tenemos que
+$$a_{i+1} \leq e^{(i+1)s}\left(a_0 + \frac{t}{s}\right) - \frac{t}{s}$$
+\qed
+\end{proof}
+
+Pasamos ya a ver y demostrar el teorema que nos da el orden de precisión del método de Euler.\\
+
+\begin{theorem} Error global del método de Euler \\
+
+El error global del método de Euler para sistemas de ecuaciones es $O(h)$, donde $h$ es el tamaño de paso que hemos elegido al aplicar el método $(h = \frac{b-a}{n})$
+
+\end{theorem}
+
+\begin{proof}
+Para probar este resultado, supondremos que nos encontramos ante un problema bien planteado, y que cada función $f_j(t, x_1, ..., x_n)$ es Lipschitziana en la variable $x_j$, con constante de Lipschitz $L_j$, y que para cada $x_j$ existe una constante $M_j$ tal que $| x''_j(t) | \leq M_j, \forall t \in [a,b]$.\\
+
+Tomamos entonces una de las funciones $f_j$ (el razonamiento es análogo para las demás). Como ya vimos para el error local, podemos escribir $x_j(t_{i+1})$ como:
+$$ x_j(t_{i+1}) = x_j(t_i) + h*f_j(t_i, x_i, ..., x_n) + \frac{h^2}{2}*x''_j(\xi_j) $$
+Y podemos escribir también la aproximación para la variable $x_j$ en el paso $i+1$, $\omega_{i+1, j}$ como:
+$$ \omega_{i+1, j} = \omega_{i,j} + h*f_j(t_i, \omega_{i,1}, ..., \omega_{i,n}) $$
+
+La diferencia entre ambas cantidades sería el error total acumulado en las primeras $i+1$ iteraciones del método. Podemos expresar esa diferencia como sigue:
+$$x_j(t_{i+1}) - \omega_{i+1,j} = x_j(t_i) - \omega_{i,j} + h*[f_j(t_i, x_i, ..., x_n) - f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})] + \frac{h^2}{2}*x''_j(\xi_j) $$
+Se cumple entonces que:
+$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq | x_j(t_i) - \omega_{i,j} | + h|[f_j(t_i, x_i, ..., x_n) - f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})]| + \frac{h^2}{2}*|x''_j(\xi_j)| $$
+Además, por ser Lipschitziana en la variable $x_j$, con constante de Lipschitz $L_j$, y por ser $|x''_j(t)| \leq M_j$, tenemos:
+$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq (1+hL_j)*| x_j(t_i) - \omega_{i,j} | + \frac{h^2*M_j}{2} $$
+
+Usando ahora el lema anterior, tomando $a_{i,j} = | x_j(t_{i}) - \omega_{i,j} | $ para cada $ j = 0, 1, ..., N$, y $s=hL_j, t = \frac{h^2M_j}{2} $ tenemos:
+
+$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq e^{(i+1)hL_j}\left( |x_j(t_0) - \omega_{0,j} | + \frac{h^2M_j}{2hL_j} \right) - \frac{h^2M_j}{2hL_j} $$
+
+Ahora, puesto que $ | x_j(t_0) - \omega_{0,j} | = 0$ y que $(i+1)h = t_{i+1} - t_0 = t_{i+1} - a $ se concluye que:
+$$ | x_j(t_{i+1}) - \omega_{i+1, j} | \leq \frac{hM_j}{2L_j}(e^{(t_{i+1}-a)L_j} - 1) $$
+Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funciones $f_j$. Finalmente, tomando la norma euclídea de todos los errores globales, podemos concluir que el método es de orden $O(h)$.\\
+\qed 
 \end{proof}
 
 \section{Ejemplos y ejercicios resueltos}
