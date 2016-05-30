@@ -315,6 +315,54 @@ $$
 
 A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,1] y una longitud de paso h = 0.1.
 
+\section{Artículo}
+
+En esta sección realizaremos un resumen del artículo ``Numerical solution of differential equations using multiquadric radial basis function networks"(Nam Mai-Duy, Thanh Tran-Cong; 2001). En este artículo se introducirá una técnica novedosa para la resolución de ecuaciones diferenciales ordinarias, a partir de ahora ODEs, y ecuaciones diferenciales parciales, PDEs. Previo al resumen veamos una breve descripción de red neuronal:\\
+
+En el contexto de la informática una red neuronal es un conjunto de unidades menores llamadas neuronas interconectadas entre sí. Cada neurona, a partir de un conjunto de entradas, es capaz de proporcionar una salida en la que aparentemente se aplica inteligencia. Para generar dicha salida se hace uso de funciones con carácter probabilísticos cuyos pesos habrá que ajustar en la fase de entrenamiento. Esta fase de entrenamiento consistene en proporcionar un conjunto de entradas con sus correspondientes salidas, de forma que la red neuronal se ajusta según estos datos proporcionados, es decir, modifica dichas funciones a través del conocimiento proporcionado y de esta forma ``aprende" a dar la respuesta correcta para el problema en cuestión con una probabilidad de acierto muy elevada.\\
+
+Los métodos clásicos para la obtención de aproximaciones de la solución de ecuaciones diferenciales suponen un proceso costoso al tener que seleccionar un dominio adecuado con un número finito de elementos para proceder con el mismo. En este artículo, como ya se ha comentado, se presenta un método novedoso para la resolución de ecuaciones diferenciales lineales haciendo uso de redes neuronales artificiales en el que no habrá problema para seleccionar el dominio. \\
+
+En el método presentado en el artículo se hace uso de redes de base radial, que son redes neuronales en las que las funciones que determinan la salida serán funciones de base radial, esto es, funciones reales cuya imagen para cada punto viene determinada por la distancia al origen, es decir, diremos que $\phi:\mathbf{R}^n\to \mathbf{R} $  es radial si
+
+$$\exists \Phi:\mathbf{R}\to \mathbf{R}\ \ tq\ \phi(x)=\Phi(\parallel x\parallel)\ \ \forall x\in\mathbf{R}^n$$
+
+Existen diversas funciones de base radial, pero los autores harán uso de las funciones multicuadráticas, que son aquellas que se definen como sigue:
+
+$$\phi(r) = \sqrt{\epsilon^2+r^2}$$
+
+Notaremos a los métodos numéricos que hacen uso de las redes neuronales con funciones de base radial como RBFN, y podremos clasificarlas como directos (DRBFN) e indirectos (IRBFN). Recordemos en primer lugar que los métodos numéricos directos para la aproximación de funciones y sus derivadas son aquellos que aproximan la función y la aproximación de las sucesivas derivadas serán las sucesivas derivadas de dicha aproximación, mientras que los métodos indirectos son aquellos en los que en primer lugar se aproximan las derivadas de mayor orden y posteriormente se consiguen las de orden menor integrando dicha aproximación. Puesto que se hace uso de funciones multicuadráticas, la función aproximación será de la forma:
+
+$$ u(x) = \sum\limits_{i=1}^{m} w^{(i)}g^{(i)}(x) = \sum\limits_{i=1}^{m} w^{(i)}\sqrt{\epsilon^{(i)^2}+x^2}$$
+
+Donde m es el número de neuronas utilizadas en el método y $w^{(i)}$ los pesos asociados a cada neurona obtenidos durante la fase de entrenamiento. Más adelante veremos como determinar $\epsilon^{(i)}$. La norma del error que se cometerá vendrá determinada por:
+
+$$N_e = \sqrt{\frac{\sum\limits_{i=1}^{m}(u_e(x^{(i)})-u(x^{(i)}))^2}{\sum\limits_{i=1}^{m}u_e(x^{(i)})^2}}$$
+
+Para aplicar el método debemos contar con la imagen de una serie de puntos de colocación o nodos $\{u(x^{(i)})=y^{(i)}\}_{i=1}^{n}$ que servirán como entrenamiento para la determinación de la función. Se contará además con otro tipo de puntos, que llamaremos centros, y que se repartirán uniformemente en forma de malla a lo largo de todo el dominio de la función a aproximar. En la figura 1 podemos ver la distribución de los centros y los nodos.\\
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.45]{centros.png}
+\label{figura1}
+\caption{Distribución de los centros (círculos) y nodos (*)} 
+\end{figure}
+
+A lo largo del artículo los autores darán resultados de la aplicación del método para la resolución de ODEs en dominios regulares y de PDEs en elipses. Entenderemos por dominio regular a aquel que esté formado por el producto cartesiano de intervalos. En dichos dominios nos será relativamente fácil establecer los centros, y aquí es donde reside la única libertad que podemos aplicar en el método. Veamos por qué.\\
+
+A la hora de crear la malla en nuestro dominio podremos hacerla más densa o menos con total libertad, pero estableceremos la siguiente relación con $\epsilon^{(i)}$:
+
+$$\epsilon^{(i)} = \beta d^{(i)}$$
+
+Donde $d^{(i)}$ es la distancia del i-ésimo centro al centro más cercano. Podremos elegir $\beta > 0$ con libertad, aunque dicho parámetro influirá en la función aproximación obtenida. Aunque no hay forma conocida de determinar el valor óptimo de $\beta$ en cada ocasión, experimentalmente los autores han obtenido que los valores óptimos suelen centrarse en el intervalo [7,10].\\
+
+A continuación se pasa al estudio de la aplicación del método para PDEs en dominios elípticos. El problema que surge en este momento es la generación de la malla. La solución es simple: si $\Omega$ es nuestro dominio elíptico, tomaremos $\Omega^*$ dominio regular tal que $\Omega^*\supset \Omega$ , y aplicaremos el método para el dominio $\Omega^*$, aunque los nodos se encontrarán todos dentro de $\Omega$.\\
+
+Tras una serie de ejemplos los autores muestran como el método IRBFN consigue resultados más adecuados que los conseguidos con el método directo, y además, los resultados son mejores para un mayor rango de $\beta$. Los autores dicen no tener una demostración teórica que corrobore este hecho, pero dan la idea intuitiva del porqué de este hecho: al cometer un error determinado con el método directo, al derivar para obtener las sucesivas derivadas intensificamos el error, mientras que en el método indirecto disminuimos el efecto del error cometido.\\%Distribución del error
+
+Durante el artículo también se realizan comparaciones con los métodos clásicos y se concluye que el método directo, en términos de error, es igual de adecuado que los métodos clásicos, mientras que el método indirecto consigue resultados de varios órdenes de magnitud mayor.\\
+
+Finalmente se habla de una futura adecuación del método para dominios irregulares construyendo un recubrimiento finito de dominios regulares y procediendo de igual forma que con el caso del dominio elíptico.\\
 
 
 \end{document}
