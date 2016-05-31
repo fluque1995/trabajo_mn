@@ -398,7 +398,7 @@ x(0)=\begin{bmatrix}
 \end{bmatrix}
 \end{equation*}
  
-Dicho esto, calculemos, a modo de ejemplo (los demás cálculos se realizarán posteriormente con maxima), $x_1 y x_2$:
+Dicho esto, calculemos, a modo de ejemplo (los demás cálculos se realizarán posteriormente con maxima), $x_1$ y $x_2$:
 
 \begin{equation*}
 x_1=x_0+f(t_0,x_0)h=\begin{bmatrix}
@@ -477,13 +477,12 @@ $$N_e = \sqrt{\frac{\sum\limits_{i=1}^{m}(u_e(x^{(i)})-u(x^{(i)}))^2}{\sum\limit
 
 Para aplicar el método debemos contar con la imagen de una serie de puntos de colocación o nodos $\{u(x^{(i)})=y^{(i)}\}_{i=1}^{n}$ que servirán como entrenamiento para la determinación de la función. Se contará además con otro tipo de puntos, que llamaremos centros, y que se repartirán uniformemente en forma de malla a lo largo de todo el dominio de la función a aproximar. En la figura 1 podemos ver la distribución de los centros y los nodos.\\
 
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.45]{centros.png}
-%\label{figura1}
-%\caption{Distribución de los centros ($\circ$) y nodos %($\bullet$)} 
-
-%\end{figure}
+\begin{figure}
+\centering
+\includegraphics[scale=0.45]{centros}
+\label{figura1}
+\caption{Distribución de los centros ($\circ$) y nodos ($\bullet$)} 
+\end{figure}
 
 A lo largo del artículo los autores darán resultados de la aplicación del método para la resolución de ODEs en dominios regulares y de PDEs en elipses. Entenderemos por dominio regular a aquel que esté formado por el producto cartesiano de intervalos. En dichos dominios nos será relativamente fácil establecer los centros, y aquí es donde reside la única libertad que podemos aplicar en el método. Veamos por qué.\\
 
