@@ -44,6 +44,15 @@
 \pretolerance=2000
 \tolerance=3000
 
+%Configuración de tablas
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{float}
+
 % Report title
 \title{
     Método de Euler en sistemas de ecuaciones diferenciales \\              % Title
@@ -474,7 +483,45 @@ y_2' = x''' = 2y_2 - 2y_1
 \end{cases}
 $$
 
-A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,1] y una longitud de paso h = 0.1.
+A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,$pi$/4] y l 25, 50 y 100 nodos. Los datos obtenidos general la siguiente gráfica: 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.65]{img/graphic.png}
+\label{figura1}
+\caption{Aproximación para 25, 50 y 100 nodos} 
+\end{figure}
+
+A continuación usaremos de nuevo el método de Euler para sistemas, pero esta vez para tamaños de paso menores, de forma que podamos ver la evolución del error según el número de nodos usado. Tras las ejecuciones los datos obtenidos son los siguientes:
+
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{3pt}
+        
+        \begin{tabular}{|c|c|c|c|c}
+            \hline
+            \textbf{h} & {\textbf{u($\pi$/4)}} & \textbf{Error} \\ 
+            \hline
+                120 & 1.581351427438043 & 0.030468230520017\\
+            \hline
+                240 & 1.566883575533628 & 0.016000378615602\\
+            \hline
+                360 & 1.561353411976403 & 0.010470215058378\\
+            \hline
+                480 & 1.558765635465628 & 0.007882438547603\\
+            \hline
+                600 & 1.557203467884946 & 0.0063202709669205\\
+            \hline
+                720 &  1.556204299202344 & 0.0053211022843184\\
+            \hline
+                840 & 1.555409383683734 & 0.0045261867657087\\
+            \hline
+        \end{tabular}
+        
+        \caption{Descripción del actor restaurante.}
+        \label{table:actor:restaurante}             
+    \end{table}
+
 
 \section{Artículo}
 
@@ -504,7 +551,7 @@ Para aplicar el método debemos contar con la imagen de una serie de puntos de c
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.45]{centros}
+\includegraphics[scale=0.45]{img/centros}
 \label{figura1}
 \caption{Distribución de los centros ($\circ$) y nodos ($\bullet$)} 
 \end{figure}
