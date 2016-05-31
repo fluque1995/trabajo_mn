@@ -268,6 +268,8 @@ $$ \lim_{h \rightarrow 0} max | \tau_i(h) | \rightarrow 0 $$
 
 Veremos más adelante que el método de Euler para sistemas es consistente, cuando hagamos un estudio del error local. Definimos ahora la propiedad de estabilidad. Esta propiedad nos dice cómo se propagan los errores en los datos iniciales al utilizar el algoritmo. Se dice que un método es estable si una perturbación en los datos de entrada no se ve maximizado cuando se utiliza el método para obtener la solución al problema. De forma más rigurosa, se dice que el método es estable si dado un PVI, con $F(t, X(t))$ Lipschitziana, con $X_0$ como valor inicial exacto y $X'_0$ como valor de entrada (con una pequeña perturbación), existe una constante $K$ tal que $|\omega' - \omega| \leq K|X'_0 - X_0|$.\\
 
+Podemos concluir que el método de Euler es estable al aplicarse a problemas bien planteados, ya que viene impuesta por la condición de Lipschtiz.
+
 Para finalizar, tenemos que por el teorema de Lax-Richtmyer, que no demostraremos por su dificultad, la consistencia y la estabilidad de un método implican su convergencia. Procedemos al estudio del error, que nos dará la consistencia y estabilidad para el método de Euler, por lo que podremos asegurar su convergencia.\\
 
 Antes de comenzar con el estudio del error, comenzaremos definiendo los tipos de errores que se pueden encontrar cuando se utilizan métodos numéricos para resolución de ecuaciones diferenciales:
