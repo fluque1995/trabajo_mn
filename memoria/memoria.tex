@@ -404,6 +404,45 @@ Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funcion
 \qed 
 \end{proof}
 
+Aprovechando que la demostración del error global es similar a la de la estabilidad del método, demostraremos ahora que el método es estable. Para ello, tomamos el PVI:
+
+$$
+X'(t)=F(t,X(t)), \, 
+X(t)=\begin{bmatrix}
+    x_1(t) \\
+    \vdots \\
+    x_n(t)
+    \end{bmatrix}
+$$
+
+Para el que tenemos las soluciones $X(t_0) = X_0$, $X'_0 = X_0 + \varepsilon$, donde $\varepsilon = [\varepsilon_1, \, ..., \varepsilon_n]$. Esto es, la condición inicial exacta y la condición inicial con una pequeña perturbación para cada variable. Definimos $Z_i = X_i - X'_i$, es decir, la diferencia que hay en la iteración $i$ entre la aproximación calculada con el valor inicial correcto y el valor perturbado. Tenemos que:
+
+$$Z_{i+1} = Z_i + h*(F(t_i, X_i) - F(t_i, X'_i)) $$
+
+Tomando la norma euclídea, se tiene que   
+
+$$|Z_{i+1}| \leq |Z_i| + h*|F(t_i, X_i) - F(t_i, X'_i)| $$
+
+Por ser $F(t, X(t))$ lipschitziana con constante de Lipschitz $L$, se tiene que 
+
+$$|Z_{i+1}| \leq |Z_i|(1 + hL)$$
+
+Y aplicando la desigualda de forma recursiva tenemos que 
+
+$$|Z_{i+1}| \leq |Z_0|(1 + hL)^{i+1} = |\varepsilon|(1 + hL)^{i+1} $$
+
+Tomando ahora la desigualdad del primer lema que citamos en este apartado, tenemos que de la desigualdad anterior se deriva que 
+
+$$|Z_{i+1}| \leq |\varepsilon|e^{hL(i+1)} $$
+
+Y finalmente, tomando $h \rightarrow 0$ podemos concluir que 
+
+$$ lim_{h \rightarrow 0} |Z_{i+1}| = \varepsilon $$
+
+Lo que nos determina que el método es estable. Como ya demostramos la consistencia del mismo en el apartado anterior, podemos concluir que el método es convergente. Esto era de suponer, ya que el funcionamiento del método es análogo al que se utiliza para ecuaciones diferenciales ordinarias, para el que teníamos ya demostrada la convergencia. Lo único que hay que hacer es tener cuidado porque ahora se está trabajando con funciones vectoriales, pero tomando la norma de los vectores que aparecen, la demostración es esencialmente la misma.\\
+
+Pasamos ahora a ver ejemplos resueltos con el método de Euler, para ver su aplicación real.
+
 \section{Ejemplos y ejercicios resueltos}
 
 \subsection{Método de Euler para sistemas de ecuaciones}
