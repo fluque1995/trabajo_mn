@@ -401,9 +401,9 @@ En el contexto de la informática una red neuronal es un conjunto de unidades me
 
 Los métodos clásicos para la obtención de aproximaciones de la solución de ecuaciones diferenciales suponen un proceso costoso al tener que seleccionar un dominio adecuado con un número finito de elementos para proceder con el mismo. En este artículo, como ya se ha comentado, se presenta un método novedoso para la resolución de ecuaciones diferenciales lineales haciendo uso de redes neuronales artificiales en el que no habrá problema para seleccionar el dominio. \\
 
-En el método presentado en el artículo se hace uso de redes de base radial, que son redes neuronales en las que las funciones que determinan la salida serán funciones de base radial, esto es, funciones reales cuya imagen para cada punto viene determinada por la distancia al origen, es decir, diremos que $\phi:\mathbf{R}^n\to \mathbf{R} $  es radial si
+En el método presentado en el artículo se hace uso de redes de base radial, que son redes neuronales en las que las funciones que determinan la salida serán funciones de base radial, esto es, funciones reales cuya imagen para cada punto viene determinada por la distancia al origen, es decir, diremos que $\phi:\mathbb{R}^n\to \mathbb{R} $  es radial si
 
-$$\exists \Phi:\mathbf{R}\to \mathbf{R}\ \ tq\ \phi(x)=\Phi(\parallel x\parallel)\ \ \forall x\in\mathbf{R}^n$$
+$$\exists \Phi:\mathbb{R}\to \mathbb{R}\ \ tq\ \phi(x)=\Phi(\parallel x\parallel)\ \ \forall x\in\mathbb{R}^n$$
 
 Existen diversas funciones de base radial, pero los autores harán uso de las funciones multicuadráticas, que son aquellas que se definen como sigue:
 
@@ -423,13 +423,13 @@ Para aplicar el método debemos contar con la imagen de una serie de puntos de c
 \centering
 \includegraphics[scale=0.45]{centros.png}
 \label{figura1}
-\caption{Distribución de los centros (círculos) y nodos (*)} 
+\caption{Distribución de los centros ($\circ$) y nodos ($\bullet$)} 
+
 \end{figure}
 
 A lo largo del artículo los autores darán resultados de la aplicación del método para la resolución de ODEs en dominios regulares y de PDEs en elipses. Entenderemos por dominio regular a aquel que esté formado por el producto cartesiano de intervalos. En dichos dominios nos será relativamente fácil establecer los centros, y aquí es donde reside la única libertad que podemos aplicar en el método. Veamos por qué.\\
 
 A la hora de crear la malla en nuestro dominio podremos hacerla más densa o menos con total libertad, pero estableceremos la siguiente relación con $\epsilon^{(i)}$:
-
 $$\epsilon^{(i)} = \beta d^{(i)}$$
 
 Donde $d^{(i)}$ es la distancia del i-ésimo centro al centro más cercano. Podremos elegir $\beta > 0$ con libertad, aunque dicho parámetro influirá en la función aproximación obtenida. Aunque no hay forma conocida de determinar el valor óptimo de $\beta$ en cada ocasión, experimentalmente los autores han obtenido que los valores óptimos suelen centrarse en el intervalo [7,10].\\
