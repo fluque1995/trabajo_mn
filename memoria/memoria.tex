@@ -44,6 +44,15 @@
 \pretolerance=2000
 \tolerance=3000
 
+%Configuración de tablas
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{float}
+
 % Report title
 \title{
     Método de Euler en sistemas de ecuaciones diferenciales \\              % Title
@@ -266,7 +275,9 @@ Para ver la convergencia del método, vamos a definir dos conceptos previos, que
 
 $$ \lim_{h \rightarrow 0} max | \tau_i(h) | \rightarrow 0 $$
 
-Veremos más adelante que el método de Euler para sistemas es consistente, cuando hagamos un estudio del error. 
+Veremos más adelante que el método de Euler para sistemas es consistente, cuando hagamos un estudio del error local. Definimos ahora la propiedad de estabilidad. Esta propiedad nos dice cómo se propagan los errores en los datos iniciales al utilizar el algoritmo. Se dice que un método es estable si una perturbación en los datos de entrada no se ve maximizado cuando se utiliza el método para obtener la solución al problema. De forma más rigurosa, se dice que el método es estable si dado un PVI, con $F(t, X(t))$ Lipschitziana, con $X_0$ como valor inicial exacto y $X'_0$ como valor de entrada (con una pequeña perturbación), existe una constante $K$ tal que $|\omega' - \omega| \leq K|X'_0 - X_0|$.\\
+
+Para finalizar, tenemos que por el teorema de Lax-Richtmyer, que no demostraremos por su dificultad, la consistencia y la estabilidad de un método implican su convergencia. Procedemos al estudio del error, que nos dará la consistencia y estabilidad para el método de Euler, por lo que podremos asegurar su convergencia.\\
 
 Antes de comenzar con el estudio del error, comenzaremos definiendo los tipos de errores que se pueden encontrar cuando se utilizan métodos numéricos para resolución de ecuaciones diferenciales:
 
@@ -315,6 +326,8 @@ e_{i+1, n}
 Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$\\
 \qed
 \end{proof}
+
+Merece la pena hacer ahora la apreciación de la consistencia del método de Euler. Como acabamos de demostrar, el error local depende de $h^2$, por lo que cuando $h$ tienda a 0, tendremos que el máximo de los errores locales tenderá también a 0, por tanto el método es consistente.\\
 
 Una vez visto el error local que se comete con el método de Euler, pasamos a estudiar el error global que se comete.
 
@@ -474,7 +487,45 @@ y_2' = x''' = 2y_2 - 2y_1
 \end{cases}
 $$
 
-A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,1] y una longitud de paso h = 0.1.
+A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,$pi$/4] y l 25, 50 y 100 nodos. Los datos obtenidos general la siguiente gráfica: 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.65]{img/graphic.png}
+\label{figura1}
+\caption{Aproximación para 25, 50 y 100 nodos} 
+\end{figure}
+
+A continuación usaremos de nuevo el método de Euler para sistemas, pero esta vez para tamaños de paso menores, de forma que podamos ver la evolución del error según el número de nodos usado. Tras las ejecuciones los datos obtenidos son los siguientes:
+
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{3pt}
+        
+        \begin{tabular}{|c|c|c|c|c}
+            \hline
+            \textbf{h} & {\textbf{u($\pi$/4)}} & \textbf{Error} \\ 
+            \hline
+                120 & 1.581351427438043 & 0.030468230520017\\
+            \hline
+                240 & 1.566883575533628 & 0.016000378615602\\
+            \hline
+                360 & 1.561353411976403 & 0.010470215058378\\
+            \hline
+                480 & 1.558765635465628 & 0.007882438547603\\
+            \hline
+                600 & 1.557203467884946 & 0.0063202709669205\\
+            \hline
+                720 &  1.556204299202344 & 0.0053211022843184\\
+            \hline
+                840 & 1.555409383683734 & 0.0045261867657087\\
+            \hline
+        \end{tabular}
+        
+        \caption{Descripción del actor restaurante.}
+        \label{table:actor:restaurante}             
+    \end{table}
+
 
 \section{Artículo}
 
@@ -504,7 +555,7 @@ Para aplicar el método debemos contar con la imagen de una serie de puntos de c
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.45]{centros}
+\includegraphics[scale=0.45]{img/centros}
 \label{figura1}
 \caption{Distribución de los centros ($\circ$) y nodos ($\bullet$)} 
 \end{figure}
