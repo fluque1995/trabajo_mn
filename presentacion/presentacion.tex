@@ -414,7 +414,69 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 	Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$
 \end{frame}
 
+\subsection{Error global}
+\begin{frame}
+	\frametitle{Error global}
+	
+	\begin{block}{Lema 1}
+		Para toda $x \geq -1$ y para cualquier $m$ positiva, tenemos que $0 \leq (1 + x)^m \leq e^{mx}$
+	\end{block}
+	
+	
+	\begin{block}{Lema 2}
+		Si $s$ y $t$ son números reales positivos, $\{a_i\}^k_{i=0}$ es una sucesión que satisface $ a_0 \geq -t/s$ y
+		$$a_{i+1} \leq (1+s)a_i + t, \, \forall i=0, 1, ..., k$$
+		entonces se tiene que
+		$$a_{i+1} \leq e^{(i+1)s}\left( a_0 + \frac{t}{s}\right) - \frac{t}{s}$$
+	\end{block}
+	%Aplicando el teorema de Taylor:
+	
+	%$$ 0 \leq 1 + x \leq 1 + x + \frac{1}{2}x^2e^\xi = e^x $$
+	
+	%donde $0 < \xi < x$.
+	
+	%y como $1 + x \geq 0$:
+	%$$ 0 \leq (1 + x)^m \leq (e^x)^m = e^{mx} $$
+\end{frame}
 
+\begin{frame}
+	\frametitle{Error global}
+	\begin{block}{Teorema}
+		El error global del método de Euler para sistemas de ecuaciones es $O(h)$, donde $h$ es el tamaño de paso que hemos elegido al aplicar el método. 
+	\end{block}
+	
+	El esquema general de esta demostración sería el siguiente. Suponiendo que cada función, $f_j(t, x_1, ..., x_n)$ es Lipschitziana en la variable $x_j$, con constante de Lipschitz $L_j$, y que para cada $x_j$ existe una constante $M_j$ tal que $| x''_j(t) | \leq M_j, \forall t \in [a,b]$.\\
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Error global}
+
+	Teniendo en cuenta el desarrollo de Taylor para $x_j(t_{i+1})$ y la aproximación $w_{i+1,j}$:
+	
+	$$
+	x_j(t_{i+1}) - \omega_{i+1,j} = x_j(t_i) - \omega_{i,j} + h*[f_j(t_i, x_i, ..., x_n) $$
+	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})] + \frac{h^2}{2}*x''_j(\xi_j) $$
+	Se cumple entonces que:
+	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq | x_j(t_i) - \omega_{i,j} | + h|[f_j(t_i, x_i, ..., x_n) $$
+	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})]| + \frac{h^2}{2}*|x''_j(\xi_j)| $$
+	
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Error global}
+	Y de aquí, teniendo en cuenta que $f_j$ es Lipschitziana:
+	
+	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq (1+hL_j)*| x_j(t_i) - \omega_{i,j} | + \frac{h^2*M_j}{2} $$
+	
+	Y aplicando el lema anterior y operando:
+	
+	$$ | x_j(t_{i+1}) - \omega_{i+1, j} | \leq \frac{hM_j}{2L_j}(e^{(t_{i+1}-a)L_j} - 1) $$
+	Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funciones $f_j$. Finalmente, tomando la norma euclídea de todos los errores globales, podemos concluir que el método es de orden $O(h)$.
+\end{frame}
 
 
 
