@@ -266,7 +266,7 @@ El error local para el método de Euler es $O(h^2)$, donde $h$ es el tamaño del
 \begin{proof}
 Veamos la demostración de dicho resultado. Tomamos el PVI asociado al sistema de ecuaciones diferenciales:
 $$ X' = F(t, X),\, X(t_0) = X_0 $$
-Supongamos que tenemos la el valor exacto para un determinado $t_i$, es decir, tenemos $(t_i, X_i)$ exacto. Entonces, el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Tomando cada una de las componentes por separado, y expresando $x_j(t_{i+1}), j = 1, ..., n$ usando su polinomio de Taylor centrado en $t_i$ tenemos:
+Supongamos que tenemos el valor exacto para un determinado $t_i$, es decir, tenemos $(t_i, X_i)$ exacto. Entonces, el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Tomando cada una de las componentes por separado, y expresando $x_j(t_{i+1}), j = 1, ..., n$ usando su polinomio de Taylor centrado en $t_i$ tenemos:
 $$ x_j(t_{i+1}) = x_j(t_i) + h*x'_j(t_i) + \frac{h^2}{2}*x''_j(t_i) + \frac{h^3}{3!}*x'''_j(t_i) + ... = $$
 $$ = x_j(t_i) + h*x'_j(t_i) + \frac{h^2}{2}*x''_j(\xi_j) $$
 Donde $h = t_{i+1} - t_i$. Con el método de Euler, la aproximación que obtenemos para $x_j(t_i) = \omega_{i+1, j}$ es:

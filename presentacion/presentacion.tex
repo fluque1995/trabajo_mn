@@ -126,16 +126,295 @@
 
 %% Diapositiva de título.
 \begin{frame}
-\titlepage % Print the title page as the first slide
+\titlepage 
 \end{frame}
 
 %% Diapositiva de contenidos.
 % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, 
 % these will automatically be printed on this slide as an overview of your presentation
+
+\section{Introducción}
 \begin{frame}
-  \frametitle{Contenidos} % Table of contents slide, comment this block out to remove it
-  \tableofcontents
+  \frametitle{Introducción}
+   % Table of contents slide, comment this block out to remove it
+  Explicaremos el método de Euler para sistemas de ecuaciones diferenciales de primer orden. Por consiguiente, también servirá para resolver ecuaciones de orden superior. Este método no dejará de ser una extensión del método de Euler para ecuaciones diferenciales. \\
+  
+  Cabe nombrar que en la práctica no será muy utilizado, pues no aporta soluciones lo suficientemente buenas, es interesante su conocimiento por su gran simplicidad.
+  
 \end{frame}
+
+
+\subsection{Partes del trabajo}
+\begin{frame}
+	\frametitle{Partes del trabajo:}
+	\begin{itemize}
+		\item Descripción general de un sistema de ecuaciones diferenciales
+		\item Ecuaciones diferenciales de orden superior y reescritura como sistemas.
+		\item Método de Euler para sistemas de ecuaciones diferenciales
+		\item Estudio del error y análisis de la convergencia del método.
+		
+	\end{itemize}
+\end{frame}
+
+\section{Descripción general de un sistema de ecuaciones diferenciales}
+\subsection{Concepto de ecuación diferencial}
+\begin{frame}
+	\frametitle{Concepto de ecuación diferencial:}
+	
+	Es una igualdad en la que interviene una variable independiente (\texttt{t}), una variable dependiente (x(\texttt{t})) y las sucesivas derivadas de la variable dependiente respecto de la independiente. de forma general, escribimos: 
+	
+	$$
+	F(t,x,x', ..., x^{n)})=0
+	$$
+	
+	También, nombrar que se definía \textit{orden} de la ecuación diferencial, como el mayor orden de derivación de la variable independiente que aparece en dicha ecuación.\\
+	
+	La \textit{solución} vendrá dada por un conjunto de ecuaciones que cumplan dichas condiciones.
+\end{frame}
+
+\subsection{PVI}
+\begin{frame}
+	\frametitle{Problema de valores iniciales}
+	Se define un problema de valores iniciales (PVI), asociado a una ecuación diferencial a dicha ecuación, y el conjunto de $n$ valores (fijado $t_0$):
+	
+	$$
+	x(t_0)=y_0, x'(t_0)=y_1, ...,  x^{n-1)}(t_0)=y_{n-1}
+	$$
+	
+	Se dice que está \textit{bien planteado} si existe solución, es única y depende continuamente de los datos del problema.
+	
+\end{frame}
+
+\subsection{Sistema de ecuaciones diferenciales}
+\begin{frame}
+	\frametitle{Sistema de ecuaciones diferenciales}
+	
+	Es un conjunto de ecuaciones diferenciales en las que aparecen una variable independiente, un conjunto de variables dependientes de dicha variable independiente y las sucesivas derivadas de dichas variables dependientes respecto de la independiente. 
+	
+	$$
+	\begin{cases}
+	F_1(t, x_1, x_1', ..., x_1^{n_1)}, ..., x_m, x_m', ..., x_m^{n_m)}) = 0 \\
+	F_2(t, x_1, x_1', ..., x_1^{n_1)}, ..., x_m, x_m', ..., x_m^{n_m)}) = 0 \\
+	\vdots \\
+	F_r(t, x_1, x_1', ..., x_1^{n_1)}, ..., x_m, x_m', ..., x_m^{n_m)}) = 0
+	\end{cases}
+	$$
+	
+	Y de manera análoga a como hemos dicho anteriormente, podemos definir un PVI para este sistema.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Sistemas de primer orden}
+	Dado que trabajaremos con sistemas de primer orden, a partir de ahora notaremos los sistemas del siguiente modo:
+	
+	$$
+	\begin{cases}
+	F_1(t, x_1, ..., x_m) = \frac{d x_1}{d t} \\
+	F_2(t, x_1, ..., x_m) = \frac{d x_2}{d t} \\
+	\vdots \\
+	F_m(t, x_1, ..., x_m) = \frac{d x_m}{d t}
+	\end{cases} 
+	$$
+	
+	Y para el PVI asociado a dicho sistema: 
+	
+	$$ x_1(t_0) = y_1, x_2(t_0) = y_2, ..., x_m(t_0) = y_m $$
+\end{frame}
+
+\section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
+\subsection{Reescritura}
+\begin{frame}
+	\frametitle{Reescritura de ecuaciones de orden superior}
+Anteriormente hemos definido que es una ecuación diferencial de orden $n$. Ahora, veremos como reescribir una ecuación diferencial de orden n (con n>1), como un sistema:
+
+Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Podemos establecer los siguientes cambios de variable:
+
+$$y_0 = x, y_1 = x', y_2 = x'', \dots, y_{n-1} = x^{n-1)}$$
+
+Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la solución de nuestra ecuación diferencial.
+
+\end{frame}
+
+\begin{frame}
+	
+	Así, el sistema en el que hemos transformado la ecuación de orden $n$ sería el siguiente:
+	
+	$$
+	\begin{cases}
+	y_0' = x' = y_1\\
+	y_1' = x'' = y_2\\
+	\vdots\\
+	y_{n-2}' = x^{n-1)} = y_{n-1}\\
+	y_{n-1}' = x^{n)} = F(t, y_1, y_2, \dots, y_{n-1})
+	\end{cases}
+	$$
+	
+\end{frame}
+
+\section{Método de Euler para sistemas de ecuaciones diferenciales}
+\subsection{Recordatorio previo}
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones diferenciales}
+	
+	Antes de comentar el método de Euler para sistemas, recordemos en qué consistía el método de Euler para ecuaciones diferenciales. Dado un PVI bien planteado:
+	
+	$$
+	\begin{cases}
+	y'(t)=f(t,y(t)) \\ 
+	y(t_0)=y_0, 
+	\end{cases}
+	$$
+	
+	si tomamos puntos en un intervalo [a,b], y tomamos un N natural, de forma que $h=(b-a)/n$
+	Para cada $i=0,...,N$, tomamos los puntos:
+	$t_i=a+ih$. Aplicando Taylor (centrado en $t_i$):
+	
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones diferenciales}
+	$$
+	y(t_{i+1})=y(t_i) + y'(t_i)(t_{i+1}-t_i) + y''(\xi_i)(t_{i+1}-t_i)^2/2
+	$$ para algún $\xi_i$ entre $(t_i, ti_{i+1})$.\\
+	Equivalentemente:
+	
+	$$
+	y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + y''(\xi_i)h^2/2,
+	$$
+	
+	Es decir: 
+	
+	$$
+	y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + O(h^2).
+	$$ 
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones diferenciales}
+	
+	De este modo, el método aproxima cada $y_i$:
+	
+	$$
+	\begin{cases}
+	w_0=y_0\\
+	w_{i+1}=w_i + hf(t_i,w_i)
+	\end{cases}
+	$$
+\end{frame}
+
+\subsection{Método de Euler para sistemas de ecuaciones diferenciales}
+\begin{frame}
+	\frametitle{Método de Euler para sistemas de ecuaciones diferenciales}
+	
+	Dicho esto, podemos observar, mediante una deducción análoga, cuál es el punto de partida del método de Euler para sistemas. Dado el sistema:
+	
+	$$
+	\begin{cases}
+	x_1'=F_1(t,x_1(t),...,x_n(t)) \\
+	\vdots\\
+	x_n'=F_n(t,x_1(t),...,x_n(t))
+	\end{cases}
+	$$
+	
+ para cada $j=1,...,n$, podemos hacer una aproximación de $w_{i,j} \approx x_j(t_i)$ de forma que:
+ $$
+ \begin{cases}
+ w_{0,j}=x_{j,0} \\
+ w_{i+1,j}=w_{i,j}+ hF_j(t_i,w_{i,j})
+ \end{cases}
+ $$ 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para sistemas de ecuaciones diferenciales}
+	
+	Y así, dado el siguiente sistema: $$
+	X'(t)=F(t,X(t))
+	$$
+	donde X(t) es de la forma:
+	
+	\begin{equation*}
+	X(t)=\begin{bmatrix}
+	x_1(t) \\
+	\vdots \\
+	x_n(t)
+	\end{bmatrix}
+	\end{equation*}
+	y F(t,X(t)):
+	\begin{equation*}
+	F(t,X(t))=\begin{bmatrix}
+	F_1(t,x_1(t),...,x_n(t)) \\
+	\vdots \\
+	F_n(t,x_n(t),...,x_n(t))
+	\end{bmatrix}
+	\end{equation*}
+	
+	
+	 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para sistemas de ecuaciones diferenciales}
+	
+	podemos expresar una aproximación $W_i \approx X(t_i)$ de a siguiente manera:
+	$$
+	\begin{cases}
+	W_0=X(t_0)\\
+	W_{i+1}=W_i + hF(t_i,W_i)
+	\end{cases}
+	$$
+	donde $W_i$ es de la forma:
+	
+	\begin{equation*}
+	W_i=\begin{bmatrix}
+	w_1(t_i) \\
+	\vdots \\
+	w_n(t_i)
+	\end{bmatrix}
+	\end{equation*}
+	
+	
+\end{frame}
+
+\section{Estudio del error y análisis de la convergencia del método}
+\subsection{Error local}
+\begin{frame}
+	\frametitle{Error local}
+	\begin{block}{Teorema}
+	El error local para el método de Euler es $O(h^2)$, donde $h$ es el tamaño del paso que hemos elegido para aplicar el método.
+	\end{block}
+	
+	Para la demostración, supongamos que tenemos un valor exacto para un determinado $t_i$, entonces el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$
+	
+	Si tomamos cada componente por separado y, además, realizamos el desarrollo de Taylor de $x_j(t_{i+1})$ con $j=1,...,n$, llegaríamos a que para cada $x_j$, el error cometido en un paso del método es:
+	$$ e_{i+1, j} = | x_j(t_{i+1}) - \omega_{i+1, j} | = \frac{h^2}{2}*x''_j(\xi_{i+1, j}),\, \xi_{i+1, j} \in [t_i, t_{i+1}] $$	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Error local}
+	
+	Tenemos entonces que el vector de los errores lo podemos expresar como sigue:
+	
+	\begin{equation*}
+	E_{i+1}=\begin{bmatrix}
+	e_{i+1, 1} \\
+	\vdots \\
+	e_{i+1, n}
+	\end{bmatrix}=\begin{bmatrix}
+	\frac{h^2}{2}*x''_1(\xi_{i+1, 1}) \\
+	\vdots \\
+	\frac{h^2}{2}*x''_n(\xi_{i+1, n})
+	\end{bmatrix}
+	\end{equation*}
+	
+	Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$
+\end{frame}
+
+
 
 
 
@@ -144,7 +423,11 @@
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
-\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+\section{Introducción} 
+ Explicaremos el método de Euler para sistemas de ecuaciones diferenciales de primer orden. Por consiguiente, también servirá para resolver ecuaciones de orden superior. Este método no dejará de ser una extensión del método de Euler para ecuaciones diferenciales. \\
+ 
+ Cabe nombrar que en la práctica no será muy utilizado, pues no aporta soluciones lo suficientemente buenas, es interesante su conocimiento por su gran simplicidad.
+
 %------------------------------------------------
 
 \subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
