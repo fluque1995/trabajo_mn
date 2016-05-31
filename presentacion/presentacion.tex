@@ -105,6 +105,15 @@
 \usepackage[T1]{fontenc}
 % \selectlanguage{spanish}
 
+%Configuración de tablas
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{float}
+
 %----------------------------------------------------------------------------------------
 %   TÍTULO
 %----------------------------------------------------------------------------------------
@@ -476,6 +485,78 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 	
 	$$ | x_j(t_{i+1}) - \omega_{i+1, j} | \leq \frac{hM_j}{2L_j}(e^{(t_{i+1}-a)L_j} - 1) $$
 	Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funciones $f_j$. Finalmente, tomando la norma euclídea de todos los errores globales, podemos concluir que el método es de orden $O(h)$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones de orden superior}
+
+\section{Ejercicios}
+
+
+\begin{block}{Ejercicio 2}
+	Dado el siguiente PVI, determinar el valor de x($\pi/4$)
+	$$
+	x''' = 2x'' - 2x'     % x(t) = e^tcos(t)
+	$$
+	$$
+	x(0)=1, x'(0)=1, x''(0)=0
+	$$
+\end{block}
+
+$$
+\begin{cases}
+y_0' = x' = y_1\\
+y_1' = x'' = y_2\\
+y_2' = x''' = 2y_2 - 2y_1
+\end{cases}
+$$
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones de orden superior}
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{img/graphic.png}
+	\label{figura1}
+	\caption{Aproximación para 25 (u1), 50 (u2) y 100 (u3) nodos} 
+	\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones de orden superior}
+
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{3pt}
+        
+        \begin{tabular}{|c|c|c|c|c}
+            \hline
+            \textbf{h} & {\textbf{u($\pi$/4)}} & \textbf{Error} \\ 
+            \hline
+                $\pi$/120 & 1.581351427438043 & 0.030468230520017\\
+            \hline
+                $\pi$/240 & 1.566883575533628 & 0.016000378615602\\
+            \hline
+                $\pi$/360 & 1.561353411976403 & 0.010470215058378\\
+            \hline
+                $\pi$/480 & 1.558765635465628 & 0.007882438547603\\
+            \hline
+                $\pi$/600 & 1.557203467884946 & 0.0063202709669205\\
+            \hline
+                $\pi$/720 &  1.556204299202344 & 0.0053211022843184\\
+            \hline
+                $\pi$/840 & 1.555409383683734 & 0.0045261867657087\\
+            \hline
+        \end{tabular}
+        
+        \caption{Errores obtenidos con el método de Euler}           
+    \end{table}
+
 \end{frame}
 
 \begin{frame}
