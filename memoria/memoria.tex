@@ -125,6 +125,23 @@ Y asociado a este sistema de ecuaciones, el PVI definido por el sistema anterior
 
 $$ x_1(t_0) = y_1, x_2(t_0) = y_2, ..., x_m(t_0) = y_m $$
 
+Notemos también que podemos escribir el sistema anterior haciendo uso de una notación vectorial. De esta forma, tenemos que podemos escribir dicho sistema como sigue:
+
+$$
+X'(t)=F(t,X(t)), \, 
+X(t)=\begin{bmatrix}
+    x_1(t) \\
+    \vdots \\
+    x_n(t)
+    \end{bmatrix}
+$$
+
+Diremos que el PVI está bien planteado y satisface las condiciones anteriores. Tenemos una caracterización de problema bien planteado a partir de la condición de Lipschitz. Dado el sistema anterior, diremos que la función vectorial $F(t, X(t))$ satisface la condición de Lipschitz, con constante de Lipschitz $L$, si se cumple que $\forall t_1, t_2 \in [a,b]$ se cumple:
+
+$$ ||F(t_1, X(t_1)) - F(t_2, X(t_2))|| \leq L||X(t_1) - X(t_2)||$$
+
+Tenemos entonces que el problema anterior es un problema bien planteado si $F(t, X(t))$ es continua en su conjunto de definición y Lipschitziana.
+
 \section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
 
 En la sección anterior definimos el concepto de ecuación diferencial de orden superior y el de sistema de ecuaciones diferenciales. Veamos ahora cómo reescribir una ecuación diferencial de orden $n$ en un sistema de ecuaciones diferenciales en el que se tienen $n$ ecuaciones diferenciales de primer orden. Este paso es necesario para poder aplicar posteriormente el método de Euler, ya que este método sólo puede ser aplicado a ecuaciones diferenciales de primer orden. Veamos entonces esta forma de reescribir las ecuaciones diferenciales de orden superior. Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Podemos escribir el siguiente sistema de ecuaciones diferenciales, cuya solución es equivalente a la de la ecuación anterior. Tomamos los siguientes cambios de variable:
@@ -245,7 +262,11 @@ w_n(t_i)
 
 \subsection{Análisis de la convergencia}
 
-Para ver la convergencia del método, vamos a definir dos conceptos previos, que son cohesión y estabilidad.
+Para ver la convergencia del método, vamos a definir dos conceptos previos, que son consistencia y estabilidad. El cumplimiento de estas dos propiedades nos asegurará la convergencia del método. Comenzamos definiendo la consistencia de un método. Se dice que un método es consistente si el error de truncamiento que se produce con el método tiende a 0 cuando el tamaño del paso tiende a 0. Es decir, sea $\tau_i(h)$ el error local de truncamiento cometido en el paso $i$, entonces:
+
+$$ \lim_{h \rightarrow 0} max | \tau_i(h) | \rightarrow 0 $$
+
+Veremos más adelante que el método de Euler para sistemas es consistente, cuando hagamos un estudio del error. 
 
 Antes de comenzar con el estudio del error, comenzaremos definiendo los tipos de errores que se pueden encontrar cuando se utilizan métodos numéricos para resolución de ecuaciones diferenciales:
 
