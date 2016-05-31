@@ -266,7 +266,9 @@ Para ver la convergencia del método, vamos a definir dos conceptos previos, que
 
 $$ \lim_{h \rightarrow 0} max | \tau_i(h) | \rightarrow 0 $$
 
-Veremos más adelante que el método de Euler para sistemas es consistente, cuando hagamos un estudio del error. 
+Veremos más adelante que el método de Euler para sistemas es consistente, cuando hagamos un estudio del error local. Definimos ahora la propiedad de estabilidad. Esta propiedad nos dice cómo se propagan los errores en los datos iniciales al utilizar el algoritmo. Se dice que un método es estable si una perturbación en los datos de entrada no se ve maximizado cuando se utiliza el método para obtener la solución al problema. De forma más rigurosa, se dice que el método es estable si dado un PVI, con $F(t, X(t))$ Lipschitziana, con $X_0$ como valor inicial exacto y $X'_0$ como valor de entrada (con una pequeña perturbación), existe una constante $K$ tal que $|\omega' - \omega| \leq K|X'_0 - X_0|$.\\
+
+Para finalizar, tenemos que por el teorema de Lax-Richtmyer, que no demostraremos por su dificultad, la consistencia y la estabilidad de un método implican su convergencia. Procedemos al estudio del error, que nos dará la consistencia y estabilidad para el método de Euler, por lo que podremos asegurar su convergencia.\\
 
 Antes de comenzar con el estudio del error, comenzaremos definiendo los tipos de errores que se pueden encontrar cuando se utilizan métodos numéricos para resolución de ecuaciones diferenciales:
 
@@ -315,6 +317,8 @@ e_{i+1, n}
 Tomando ahora la norma euclídea del vector de los errores, tenemos que el error es $O(h^2)$\\
 \qed
 \end{proof}
+
+Merece la pena hacer ahora la apreciación de la consistencia del método de Euler. Como acabamos de demostrar, el error local depende de $h^2$, por lo que cuando $h$ tienda a 0, tendremos que el máximo de los errores locales tenderá también a 0, por tanto el método es consistente.\\
 
 Una vez visto el error local que se comete con el método de Euler, pasamos a estudiar el error global que se comete.
 
