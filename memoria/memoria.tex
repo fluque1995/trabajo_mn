@@ -269,8 +269,6 @@ w_n(t_i)
 
 \section{Estudio del error y análisis de la convergencia del método}
 
-\subsection{Análisis de la convergencia}
-
 Para ver la convergencia del método, vamos a definir dos conceptos previos, que son consistencia y estabilidad. El cumplimiento de estas dos propiedades nos asegurará la convergencia del método. Comenzamos definiendo la consistencia de un método. Se dice que un método es consistente si el error de truncamiento que se produce con el método tiende a 0 cuando el tamaño del paso tiende a 0. Es decir, sea $\tau_i(h)$ el error local de truncamiento cometido en el paso $i$, entonces:
 
 $$ \lim_{h \rightarrow 0} max | \tau_i(h) | \rightarrow 0 $$
@@ -291,7 +289,7 @@ Estudiemos ahora los errores definidos en el método de Euler aplicado a sistema
 
 \subsection{Error local}
 
-Como ya hemos dicho antes, se define el error local como el que se produce en un paso del algoritmo, suponiendo que el valor del que partimos $(t_i, X_i)$ es un valor real del sistema de ecuaciones. Entonces, tenemos que el error local cometido en la iteración $i+1$ lo podemos expresar como $E_{i+1} = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Veamos cómo 
+Como ya hemos dicho antes, se define el error local como el que se produce en un paso del algoritmo, suponiendo que el valor del que partimos $(t_i, X_i)$ es un valor real del sistema de ecuaciones. Entonces, tenemos que el error local cometido en la iteración $i+1$ lo podemos expresar como $E_{i+1} = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$. Veamos cómo se comporta el error local, a partir del siguiente teorema:
 
 \begin{theorem} Error local del método de Euler.\\
 
@@ -380,7 +378,7 @@ El error global del método de Euler para sistemas de ecuaciones es $O(h)$, dond
 \end{theorem}
 
 \begin{proof}
-Para probar este resultado, supondremos que nos encontramos ante un problema bien planteado, y que cada función $f_j(t, x_1, ..., x_n)$ es Lipschitziana en la variable $x_j$, con constante de Lipschitz $L_j$, y que para cada $x_j$ existe una constante $M_j$ tal que $| x''_j(t) | \leq M_j, \forall t \in [a,b]$.\\
+Para probar este resultado, supondremos que nos encontramos ante un problema bien planteado, y que la función vectorial $F(t, x_1, ..., x_n)$ es Lipschitziana en la variable $x_j$, con constante de Lipschitz $L_j$, y que para cada $x_j$ existe una constante $M_j$ tal que $| x''_j(t) | \leq M_j, \forall t \in [a,b]$.\\
 
 Tomamos entonces una de las funciones $f_j$ (el razonamiento es análogo para las demás). Como ya vimos para el error local, podemos escribir $x_j(t_{i+1})$ como:
 $$ x_j(t_{i+1}) = x_j(t_i) + h*f_j(t_i, x_i, ..., x_n) + \frac{h^2}{2}*x''_j(\xi_j) $$
@@ -427,7 +425,7 @@ Por ser $F(t, X(t))$ lipschitziana con constante de Lipschitz $L$, se tiene que
 
 $$|Z_{i+1}| \leq |Z_i|(1 + hL)$$
 
-Y aplicando la desigualda de forma recursiva tenemos que 
+Y aplicando la desigualdad de forma recursiva tenemos que 
 
 $$|Z_{i+1}| \leq |Z_0|(1 + hL)^{i+1} = |\varepsilon|(1 + hL)^{i+1} $$
 
