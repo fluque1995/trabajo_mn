@@ -487,10 +487,77 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 	Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funciones $f_j$. Finalmente, tomando la norma euclídea de todos los errores globales, podemos concluir que el método es de orden $O(h)$.
 \end{frame}
 
-\begin{frame}
-	\frametitle{Método de Euler para ecuaciones de orden superior}
 
 \section{Ejercicios}
+
+\subsection{Método de Euler para sistemas de ecuaciones de primer orden}
+
+\begin{frame}
+	\frametitle{Método de Euler para sistemas de ecuaciones primer orden}
+	\begin{block}{Ejercicio 1}
+		Dado el siguiente PVI, determinar el valor de x(1) e y(1):
+		
+		$$
+		\begin{cases}
+		x' = 2*x + 3 * y\\
+		y' = 2*x + y \\
+		x(0) = 4\\
+		y(0)=1
+		\end{cases}
+		$$
+	\end{block}
+	
+	Veamos el cálculo de una primera aproximación $X_1$
+	
+	\begin{equation*}
+	X_1=X_0+f(t_0,X_0)h=\begin{bmatrix}
+	4\\
+	1\\
+	\end{bmatrix} + \begin{bmatrix}
+	2*4 +3*1\\
+	2*4 + 1
+	\end{bmatrix}0.1=\begin{bmatrix}
+	5.1\\
+	1.9
+	\end{bmatrix}  
+	\end{equation*}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Método de Euler para sistemas de ecuaciones de primer orden}
+	
+	Observemos ahora:
+	
+	\begin{table}[H]
+		\centering
+		\setlength\extrarowheight{2.5pt}
+		
+		\begin{tabular}{|c|c|c|c|c|c}
+			\hline
+			\textbf{h} & {\textbf{$w_1(1)$}} & \textbf{Error en $w_1(1)$} & {\textbf{$w_2(1)$}} & \textbf{Error en $w_2(1)$} \\ 
+			\hline
+			0.1 & 121.80076568601001 & 42.36156385459415 & 80.67749279719001 & 28.15092782792702\\
+			\hline
+			0.01 & 151.88087689408155 & 12.28145264652261 & 100.64386402726561 & 8.184556597851425\\
+			\hline
+			0.001 & 162.86047350606881 & 1.301856034535347 & 107.96082329609433 & 0.8675973290227\\
+			\hline
+			0.0001 & 164.0967915050743 & 0.065538035529868 & 108.78482056950256 & 0.043600055614476\\
+			\hline
+			0.00001 &  164.1557725938308 & 0.0065569467733723 &  108.82405852423639 & 0.0043621008806411\\
+			\hline
+		\end{tabular}
+		
+		\caption{Errores obtenidos con el método de Euler}           
+	\end{table}
+	
+\end{frame}
+
+\subsection{Método de Euler para ecuaciones de orden superior}
+
+\begin{frame}
+	\frametitle{Método de Euler para ecuaciones de orden superior}
 
 
 \begin{block}{Ejercicio 2}

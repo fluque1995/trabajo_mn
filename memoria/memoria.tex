@@ -533,7 +533,7 @@ x(0)=\begin{bmatrix}
 Dicho esto:
 
 \begin{equation*}
-x_1=x_0+f(t_0,x_0)h=\begin{bmatrix}
+X_1=X_0+f(t_0,X_0)h=\begin{bmatrix}
 4\\
 1\\
 \end{bmatrix} + \begin{bmatrix}
@@ -545,10 +545,10 @@ x_1=x_0+f(t_0,x_0)h=\begin{bmatrix}
 \end{bmatrix}  
 \end{equation*}
 
-Ahora, calculemos $x_2$:
+Ahora, calculemos $X_2$:
 
 \begin{equation*}
-x_2=x_1+f(t_1,x_1)h=\begin{bmatrix}
+X_2=X_1+f(t_1,X_1)h=\begin{bmatrix}
 5.1\\
 1.9\\
 \end{bmatrix} + \begin{bmatrix}
@@ -561,6 +561,19 @@ x_2=x_1+f(t_1,x_1)h=\begin{bmatrix}
 \end{equation*}
 
 y así, sucesivamente.
+
+La solución exacta para este sistema viene dada por:
+
+$$
+x(t)=e^{-t}+3e^{4t};
+$$
+$$
+y(t)= -e^{-t}+2e^{4t};
+$$
+
+Además, en concreto, evaluando:\\
+
+$x(1)= 164.1623295406042$ y $y(1)=108.828420625117$\\
 
 Veamos las soluciones para distintos tamaños de paso, observando que, en efecto, cuanto menor es la h, menor es el error:
 
