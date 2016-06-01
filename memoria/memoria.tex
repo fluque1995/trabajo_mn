@@ -781,7 +781,39 @@ Veamos las soluciones para distintos tamaños de paso, observando que, en efecto
     	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
     \end{figure}
 
+\subsection{Influencia de los errores de truncatura}
 
+Vamos a mostrar ahora la influencia que tienen los errores de truncatura cuando se usan métodos numéricos para resolver ecuaciones diferenciales. Para ejemplificar este hecho, vamos a partir del problema de valores iniciales anterior, y vamos a calcular la aproximación obtenida con el método de Euler para distintos tamaños de paso.\\
+
+Para reducir el tiempo de cómputo, y que estos efectos se vean amplificados, vamos a establecer la precisión de la máquina en 6 cifras significativas. Una vez hecho esto, calcularemos la solución para el problema anterior con tamaños de paso $h = 10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}$. Las aproximaciones que obtenemos las exponemos en la tabla siguiente, junto con los errores que se producen:
+
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{2.5pt}
+        
+        \begin{tabular}{|c|c|c|c|c|c}
+            \hline
+            \textbf{h} & {\textbf{$w_1(1)$}} & \textbf{$e_1(1)$} & {\textbf{$w_2(1)$}} & \textbf{$e_2(1)$} \\ 
+            \hline
+                $10^{-1}$ & 121.800842 & 42.361487 & 80.677551 & 28.150869 \\
+            \hline
+                $10^{-2}$ & 151.881347 & 12.280982 & 100.644134 & 8.18428662 \\
+            \hline 
+                $10^{-3}$ & 162.865905 & 1.296424 & 107.964385 & 0.86403562 \\ 
+            \hline
+                $10^{-4}$ & 164.146606 & 0.015723 & 108.816040 & 0.01238062 \\
+            \hline
+                $10^{-5}$ & 164.864013 & 0.701683 & 109.291381 & 0.46296038 \\
+            \hline
+                $10^{-6}$ & 171.042297 & 6.879967 & 113.523529 & 4.69510838 \\
+            \hline
+                $10^{-7}$ & 303.327514 & 139.165184 & 197.364379 & 88.53595838 \\
+            \hline 
+        \end{tabular}
+        
+        \caption{Errores obtenidos con el método de Euler}           
+    \end{table}
+    
 \subsection{Método de Euler para ecuaciones de orden superior}
  
 En primer lugar vamos a realizar el paso de una ecuación diferencial de orden superior a un sistema, sobre el cual posteriormente podremos aplicar el método de Euler para sistemas. Para ejemplificar el proceso vamos a usar el siguiente problema de valores iniciales: 
