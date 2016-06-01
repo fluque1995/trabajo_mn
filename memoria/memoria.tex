@@ -451,7 +451,7 @@ Pasamos ahora a ver ejemplos resueltos con el método de Euler, para ver su apli
 
 \subsection{Método de Euler para sistemas de ecuaciones (Ejercicio teórico-práctico 1)}
 
-Veamos un ejemplo de aplicación del método de euler en un sistema de ecuaciones de primer orden:
+Veamos un ejemplo de aplicación del método de Euler en un sistema de ecuaciones de primer orden:
 
 Dado el siguiente sistema:
 
@@ -465,7 +465,9 @@ y(0)=0.7
 $$
 
 Queremos calcular la solución en $t=1$ con un tamaño de paso de 0.2
-Tomaremos $h=0.0.5, N=(1-0)/0.05=20$.
+
+Encontrar la solución exacta no es tarea fácil en este sistema. Aquí podemos observar la utilidad del método de Euler para obtener una aproximación. Realizaremos el estudio para $h=0.0.5, N=(1-0)/0.05=20$.: 
+
 Observar también que:
 
 \begin{equation*}
@@ -563,6 +565,8 @@ Si observamos, estos serían los resultados de los 20 pasos:
 	
 	\caption{Errores obtenidos con el método de Euler}           
 \end{table}
+
+Con esto, vemos como los valores se van estabilizando (al final, cuanto menor sea el valor de h que tomemos más cercanos quedarán los valores a la solución).
 
 
 \subsection{Método de Euler para sistemas de ecuaciones de primer orden (Ejercicio práctico 1) }
