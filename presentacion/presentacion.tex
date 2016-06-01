@@ -234,14 +234,31 @@
 	$$ x_1(t_0) = y_1, x_2(t_0) = y_2, ..., x_m(t_0) = y_m $$
 \end{frame}
 
+\begin{frame}
+	\frametitle{Notación vectorial}
+	El sistema anterior lo podemos notar en forma vectorial de la siguiente manera:\\~\\
+
+	$$ X'[t] = F(t, X[t]), \quad 
+	X[t] = \begin{bmatrix}
+    x_1(t) \\
+    \vdots \\
+    x_n(t)
+    \end{bmatrix}, \quad
+    F[t, X[t]] = \begin{bmatrix}
+    f_1(t, X[t]) \\
+    \vdots \\
+    f_n(t, X[t])
+    \end{bmatrix} $$
+\end{frame}
+
 \section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
 \subsection{Reescritura}
 \begin{frame}
 	\frametitle{Reescritura de ecuaciones de orden superior}
 
-	Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Cambios de variable:\\~\\
+	Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Cambios de variable:
 
-	$$y_0 = x, y_1 = x', y_2 = x'', \dots, y_{n-1} = x^{n-1)}$$
+	$$y_0 = x, y_1 = x', y_2 = x'', \dots, y_{n-1} = x^{n-1)}$$\\~\\
 
 	Solución de $y_0$ del sistema $\rightarrow$ solución de la ecuación diferencial.
 
@@ -387,6 +404,19 @@
 \end{frame}
 
 \section{Estudio del error y análisis de la convergencia del método}
+
+\subsection{Tipos de errores}
+\begin{frame}
+	\frametitle{Tipos de errores en los métodos de resolución numérica}
+
+	\begin{itemize}
+	\item Error local
+	\item Error global
+	\item Error de truncatura
+	\end{itemize}
+
+\end{frame}
+
 \subsection{Error local}
 \begin{frame}
 	\frametitle{Error local}
@@ -469,8 +499,6 @@
 	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq | x_j(t_i) - \omega_{i,j} | + h|[f_j(t_i, x_i, ..., x_n) $$
 	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})]| + \frac{h^2}{2}*|x''_j(\xi_j)| $$
 	
-	
-	
 \end{frame}
 
 \begin{frame}
@@ -485,6 +513,26 @@
 	Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funciones $f_j$. Finalmente, tomando la norma euclídea de todos los errores globales, podemos concluir que el método es de orden $O(h)$.
 \end{frame}
 
+\subsection{Error de truncatura}
+\begin{frame}
+	\frametitle{Error de truncatura}
+
+	Errores derivados de la precisión con la que trabaja la máquina en la que calculamos.\\~\\
+
+	Este error provoca que se aumente el error total para valores de $h$ demasiado pequeños.
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ejemplo del error de truncatura}
+
+		Se ha cambiado la precisión de la máquina para que trabaje con 6 decimales significativos.
+		\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{img/graph_error_comb}
+		\end{figure}
+
+\end{frame}
 
 \section{Ejercicios}
 
