@@ -12,6 +12,41 @@
 \documentclass[12pt]{article}       % class document and font size
 \usepackage[utf8]{inputenc}         % allowance of accents (spanish writing)
 \usepackage{indentfirst}
+\usepackage{listings}
+
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\scriptsize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},     % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Bash,                   % the language of the code
+  otherkeywords={*,...},           % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 % packages for math fonts
 \usepackage{amsmath}
@@ -77,7 +112,9 @@
 
 En este trabajo explicaremos el método de Euler para resolución numérica de sistemas de ecuaciones diferenciales de primer orden. Este método es una extensión a sistemas de ecuaciones del método de Euler para ecuaciones diferenciales. Aunque no es muy utilizado en la práctica, ya que por sus características no aporta soluciones lo suficientemente buenas, sí que se suele explicar como introducción a los métodos de resolución numérica de ecuaciones diferenciales, dada su simplicidad. Además, es el más básico de lo que se conocen como \textit{métodos explícitos de resolución numérica de EDs}, y el más básico de los métodos de \textit{Runge-Kutta}. Por tanto, suele ser una buena estrategia introducir este método previo a la explicación de los métodos nombrados, ya que los mismos son una generalización de éste.\\
 
-El trabajo irá estructurado de la siguiente forma. Primero, daremos una descripción general del concepto de sistema de ecuaciones diferenciales, ya que será el objeto sobre el que trabajaremos. Concretamente, nos centraremos en sistemas de ecuaciones diferenciales de primer orden. Tras esto, veremos cómo podemos transformar una ecuación diferencial de orden superior en un sistema de ecuaciones diferenciales de primer orden, con el fin de tratar una ecuación diferencial de orden superior con el método de Euler. Posteriormente, explicaremos el método de Euler y su aplicación a los sistemas de ecuaciones diferenciales. Completaremos este apartado con la resolución de dos ejemplos con este método. Por un lado, resolveremos un sistema de ecuaciones diferenciales de primer orden aplicando el método directamente, y por otro, tomaremos una ecuación de orden superior, la convertiremos en un sistema de ecuaciones, y resolveremos dicho sistema con el método nuevamente.\\
+El trabajo irá estructurado de la siguiente forma. Primero, daremos una descripción general del concepto de sistema de ecuaciones diferenciales, ya que será el objeto sobre el que trabajaremos. Concretamente, nos centraremos en sistemas de ecuaciones diferenciales de primer orden. Tras esto, veremos cómo podemos transformar una ecuación diferencial de orden superior en un sistema de ecuaciones diferenciales de primer orden, con el fin de tratar una ecuación diferencial de orden superior con el método de Euler. Posteriormente, explicaremos el método de Euler y su aplicación a los sistemas de ecuaciones diferenciales. Después, haremos un estudio teórico del error cometido con el uso de este método para aproximar soluciones, así como demostraremos que el método converge a la solución bajo determinadas condiciones.\\
+
+Finalmente, cerraremos el trabajo con algunos ejemplos que ilustren de forma práctica todo lo que hemos desarrollado previamente de forma teórica. Nos apoyaremos de un programa escrito en Maxima para calcular las aproximaciones en ciertos puntos con distintos sistemas de ecuaciones y ecuaciones diferenciales de orden superior, que habremos transformado previamente a sistemas de ecuaciones.\\
 
 \section{Descripción general de un sistema de ecuaciones diferenciales}
 
@@ -331,7 +368,7 @@ Una vez visto el error local que se comete con el método de Euler, pasamos a es
 
 \subsection{Error global}
 
-Como ya dijimos en la introducción de este apartado, se define el error global como el error total cometido tras las $n$ iteraciones que se realizan del método. Aunque cabría esperar que el error cometido con el método fuese la suma de los errores que se cometen en cada una de las iteraciones, esto no es cierto. Esto se debe a que, en cada pasa, el error previo cometido se ve levemente incrementado. Pasamos a estudiar entonces dicho error. Necesitaremos de dos lemas previos, que usaremos luego en la demostración:
+Como ya dijimos en la introducción de este apartado, se define el error global como el error total cometido tras las $n$ iteraciones que se realizan del método. Aunque cabría esperar que el error cometido con el método fuese la suma de los errores que se cometen en cada una de las iteraciones, esto no es cierto. Esto se debe a que, en cada paso, el error previo cometido se ve levemente incrementado. Pasamos a estudiar entonces dicho error. Necesitaremos de dos lemas previos, que usaremos luego en la demostración:
 
 \begin{lemma}
 Para toda $x \geq -1$ y para cualquier $m$ positiva, tenemos que $0 \leq (1 + x)^m \leq e^{mx}$
@@ -570,7 +607,7 @@ Si observamos, estos serían los resultados de los 20 pasos:
 
 Con esto, vemos como los valores se van estabilizando (al final, cuanto menor sea el valor de h que tomemos más cercanos quedarán los valores a la solución).
 
-\subsection{Método de Euler para sistemas de ecuaciones (Ejercicio teórico-práctico 2)}
+\subsection{Método de Euler ecuaciones de orden superrior (Ejercicio teórico-práctico 2)}
 
 Vamos mostrar el uso del método de Euler para ecuaciones de orden superior. Para ello consideraremos la siguiente ecuación:%x(t)=ln(t)t+1
 
@@ -667,8 +704,10 @@ Repitiendo el proceso sucesivamente obtenemos los siguientes resultados:
     \caption{Valores obtenidos con el método de Euler}           
 \end{table}
 
+\subsection{Influencia de los errores de truncatura (Ejercicio teórico-práctico 3)}
 
-\subsection{Método de Euler para sistemas de ecuaciones de primer orden (Ejercicio práctico 1) }
+Vamos a mostrar ahora la influencia que tienen los errores de truncatura cuando se usan métodos numéricos para resolver ecuaciones diferenciales. Para ejemplificar este hecho, vamos a partir de un problema de valores iniciales, y vamos a calcular la aproximación obtenida con el método de Euler para distintos tamaños de paso.\\
+
 Dado el PVI:
 
 $$
@@ -680,54 +719,7 @@ y(0)=1
 \end{cases}
 $$
 
-Vamos a tratar de aproximar la solución en $t=1$.% Tomando el intervalo [0,1] y $h=0.1$, aplicando el método de Euler tendríamos que:
-
-
-
-%Tenemos que: \begin{equation*}
-%f(t,x)=\begin{bmatrix}
-%2x+3y \\
-%2x+y \\
-%\end{bmatrix};\\
-%x(0)=\begin{bmatrix}
-%4 \\
-%1
-%\end{bmatrix}
-%\end{equation*}
-
-%Dicho esto:
-
-%\begin{equation*}
-%X_1=X_0+f(t_0,X_0)h=\begin{bmatrix}
-%4\\
-%1\\
-%\end{bmatrix} + \begin{bmatrix}
-%2*4 +3*1\\
-%2*4 + 1
-%\end{bmatrix}0.1=\begin{bmatrix}
-%5.1\\
-%1.9
-%\end{bmatrix}  
-%\end{equation*}
-
-%Ahora, calculemos $X_2$:
-
-%\begin{equation*}
-%X_2=X_1+f(t_1,X_1)h=\begin{bmatrix}
-%5.1\\
-%1.9\\
-%\end{bmatrix} + \begin{bmatrix}
-%2*5.1 +3*1.9\\
-%2*5.1 + 1.9
-%\end{bmatrix}0.1=\begin{bmatrix}
-%6.69\\
-%3.11
-%\end{bmatrix}  ;
-%\end{equation*}
-
-%y así, sucesivamente.
-
-La solución exacta para este sistema viene dada por:
+Vamos a tratar de aproximar la solución en $t=1$. La solución exacta para este sistema viene dada por:
 
 $$
 x(t)=e^{-t}+3e^{4t};
@@ -736,54 +728,7 @@ $$
 y(t)= -e^{-t}+2e^{4t};
 $$
 
-Además, en concreto, evaluando:\\
-
-$x(1)= 164.1623295406042$ y $y(1)=108.828420625117$\\
-
-Veamos las soluciones para distintos tamaños de paso, observando que, en efecto, cuanto menor es la h, menor es el error:
-
-	
-
-    \begin{table}[H]
-        \centering
-        \setlength\extrarowheight{2.5pt}
-        
-        \begin{tabular}{|c|c|c|c|c|c}
-            \hline
-            \textbf{h} & {\textbf{$w_1(1)$}} & \textbf{Error en $w_1(1)$} & {\textbf{$w_2(1)$}} & \textbf{Error en $w_2(1)$} \\ 
-            \hline
-                0.1 & 121.80076568601001 & 42.36156385459415 & 80.67749279719001 & 28.15092782792702\\
-            \hline
-                0.01 & 151.88087689408155 & 12.28145264652261 & 100.64386402726561 & 8.184556597851425\\
-            \hline
-                0.001 & 162.86047350606881 & 1.301856034535347 & 107.96082329609433 & 0.8675973290227\\
-            \hline
-                0.0001 & 164.0967915050743 & 0.065538035529868 & 108.78482056950256 & 0.043600055614476\\
-            \hline
-                0.00001 &  164.1557725938308 & 0.0065569467733723 &  108.82405852423639 & 0.0043621008806411\\
-            \hline
-        \end{tabular}
-        
-        \caption{Errores obtenidos con el método de Euler}           
-    \end{table}
-    
-    \begin{figure}[H]
-    	\centering
-    	\includegraphics[scale=0.65]{img/grafica2.png}
-    	\label{figura1}
-    	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
-    \end{figure}
-    
-    \begin{figure}[H]
-    	\centering
-    	\includegraphics[scale=0.65]{img/grafica3.png}
-    	\label{figura1}
-    	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
-    \end{figure}
-
-\subsection{Influencia de los errores de truncatura}
-
-Vamos a mostrar ahora la influencia que tienen los errores de truncatura cuando se usan métodos numéricos para resolver ecuaciones diferenciales. Para ejemplificar este hecho, vamos a partir del problema de valores iniciales anterior, y vamos a calcular la aproximación obtenida con el método de Euler para distintos tamaños de paso.\\
+Y evaluando: $x(1)= 164.1623295406042$ y $y(1)=108.828420625117$.\\
 
 Para reducir el tiempo de cómputo, y que estos efectos se vean amplificados, vamos a establecer la precisión de la máquina en 6 cifras significativas. Una vez hecho esto, calcularemos la solución para el problema anterior con tamaños de paso $h = 10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}$. Las aproximaciones que obtenemos las exponemos en la tabla siguiente, junto con los errores que se producen:
 
@@ -825,8 +770,75 @@ Como podemos observar, para tamaños de $h$ menores a $10^{-5}$, el error se dis
 
 Comcluímos ahora la importancia que tiene la elección correcta del tamaño del paso para obtener unas aproximaciones fiables. 
 
-\subsection{Método de Euler para ecuaciones de orden superior}
- 
+\subsection{Método de Euler para sistemas de ecuaciones de primer orden (Ejercicio práctico 1)}
+
+Ahora vamos a mostrar el comportamiento real del método, y cómo se comportan las aproximaciones cuando el tamaño del paso disminuye. A diferencia del ejercicio anterior, para obtener resultados reales, trabajaremos con toda la precisión que la máquina es capaz de darnos. Dado el PVI del ejercicio anterior:
+
+$$
+\begin{cases}
+x' = 2*x + 3 * y\\
+y' = 2*x + y \\
+x(0) = 4\\
+y(0)=1
+\end{cases}
+$$
+
+Vamos a tratar de aproximar de nuevo la solución en $t=1$.% Tomando el intervalo [0,1] y $h=0.1$, aplicando el método de Euler tendríamos que:
+
+La solución exacta para este sistema viene dada por:
+
+$$
+x(t)=e^{-t}+3e^{4t};
+$$
+$$
+y(t)= -e^{-t}+2e^{4t};
+$$
+
+Además, en concreto, evaluando:\\
+
+$x(1)= 164.1623295406042$ y $y(1)=108.828420625117$\\
+
+Veamos las soluciones para distintos tamaños de paso, observando que, en efecto, cuanto menor es la h, menor es el error:
+
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{2.5pt}
+        
+        \begin{tabular}{|c|c|c|c|c|c}
+            \hline
+            \textbf{h} & {\textbf{$w_1(1)$}} & \textbf{Error en $w_1(1)$} & {\textbf{$w_2(1)$}} & \textbf{Error en $w_2(1)$} \\ 
+            \hline
+                0.1 & 121.8007656 & 42.3615638 & 80.6774927 & 28.1509278\\
+            \hline
+                0.01 & 151.8808768 & 12.2814526 & 100.6438640 & 8.1845565\\
+            \hline
+                0.001 & 162.8604735 & 1.3018560 & 107.9608232 & 0.8675973\\
+            \hline
+                0.0001 & 164.0967915 & 0.0655380 & 108.7848205 & 0.0436001\\
+            \hline
+                0.00001 & 164.1557725 & 0.006557 &  108.8240585 & 0.0043621\\
+            \hline
+        \end{tabular}
+        
+        \caption{Errores obtenidos con el método de Euler}           
+    \end{table}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[scale=0.65]{img/grafica2.png}
+    	\label{figura1}
+    	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
+    \end{figure}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[scale=0.65]{img/grafica3.png}
+    	\label{figura1}
+    	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
+    \end{figure}
+
+\subsection{Método de Euler para ecuaciones de orden superior (Ejercicio práctico)}
+
 En primer lugar vamos a realizar el paso de una ecuación diferencial de orden superior a un sistema, sobre el cual posteriormente podremos aplicar el método de Euler para sistemas. Para ejemplificar el proceso vamos a usar el siguiente problema de valores iniciales: 
 
 $$
@@ -884,7 +896,56 @@ A continuación usaremos de nuevo el método de Euler para sistemas, pero esta v
         \caption{Errores obtenidos con el método de Euler}           
     \end{table}
 
+\section*{Anexo 1: Código implementado para el trabajo}
 
+Se expone aquí el método que se ha implementado para el trabajo. Consiste en una implementación sencilla del método de Euler en Maxima, cuyo funcionamiento es el siguiente. Se acompaña además de un ejemplo de llamada, para facilitar su comprensión:
+\begin{enumerate}
+    \item Se definen las funciones que nos dan el valor de la derivada para cada una de las variables dependientes que aparecen
+    \item Se introducen en un array
+    \item Se crea un array con el valor inicial que se tiene para cada una de las variables dependientes
+    \item Se llama al método especificando:
+    \begin{enumerate}
+        \item Array con las funciones
+        \item Array con los valores iniciales
+        \item Número de variables dependientes que intervienen
+        \item Valor inicial del que se parte (extremo inferior del intervalo)
+        \item Valor en el que se quiere aproximar la solución (extremo superior del intervalo)
+        \item Tamaño del paso
+    \end{enumerate}
+    \item El método devuelve el valor de $x_i(b)$ para todas las variables dependientes en un array
+\end{enumerate}
+
+\begin{lstlisting}[language=Mathematica]
+euler_method(arr_fs, init_vals, n_vars, a, b, h):=block([t:a, aprx, aprxb],
+    array(aprx, n_vars),
+    array(aprxb, n_vars),
+    for i:1 thru n_vars do(
+        aprx[i]: init_vals[i]
+    ),
+    while t < b do(
+        t:t+h, 
+        for i:1 thru n_vars do(
+            aprxb[i]:aprx[i]
+        ),
+        for i:1 thru n_vars do(
+            aprx[i]: aprxb[i] + h*arr_fs[i](t, aprxb)
+        ),
+    ),
+    return(aprx)
+);
+
+Definicion de las funciones y el array que las contiene:
+f1(t, xs):= xs[2];
+f2(t, xs):= -sin(xs[1]);
+fs:[f1, f2];
+
+Definicion de los valores iniciales:
+vals:[%pi/2, 0];
+
+Llamada al metodo (usando las funciones y los valores definidos, 2 variables dependientes, extremo inferior 0, extremo superior 1, h=0.2):
+euler_method(fs, vals, 2, 0, 1, 0.2);
+
+\end{lstlisting}
 \section{Artículo}
 
 En esta sección realizaremos un resumen del artículo ``Numerical solution of differential equations using multiquadric radial basis function networks"(Nam Mai-Duy, Thanh Tran-Cong; 2001). En este artículo se introducirá una técnica novedosa para la resolución de ecuaciones diferenciales ordinarias, a partir de ahora ODEs, y ecuaciones diferenciales parciales, PDEs. Previo al resumen veamos una breve descripción de red neuronal:\\
