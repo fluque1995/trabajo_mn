@@ -565,10 +565,107 @@ Si observamos, estos serían los resultados de los 20 pasos:
 		\hline
 	\end{tabular}
 	
-	\caption{Errores obtenidos con el método de Euler}           
+	\caption{Valores obtenidos con el método de Euler}           
 \end{table}
 
 Con esto, vemos como los valores se van estabilizando (al final, cuanto menor sea el valor de h que tomemos más cercanos quedarán los valores a la solución).
+
+\subsection{Método de Euler para sistemas de ecuaciones (Ejercicio teórico-práctico 2)}
+
+Vamos mostrar el uso del método de Euler para ecuaciones de orden superior. Para ello consideraremos la siguiente ecuación:%x(t)=ln(t)t+1
+
+$$x''(t) = \frac{1}{x(t)}$$
+$$ x(1) = 1, x'(1) = 1$$
+
+Para la que aproximaremos su valor en t = 1.5 para una longitud de paso h = 0.05. En primer lugar pasaremos la ecuación a un sistema de ecuaciones de orden 1:
+
+$$ y_0 = x, y_1 = x' $$
+
+$$ 
+\begin{cases}
+y_0' = x' = y_1\\
+y_1' = x'' = \frac{1}{y_0}
+\end{cases}
+$$
+
+Puesto que ya tenemos el sistema de ecuaciones, pasamos a verlo en forma matricial:
+
+\begin{equation*}
+f(t,x)=\begin{bmatrix}
+ y_1 \\
+ \frac{1}{y_0}\\
+\end{bmatrix};\\
+y(0)=\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
+\end{equation*}
+
+Pasamos entonces a aplicar el método.
+
+\begin{equation*}
+y_1=y_0+f(t_0,x_0)h=\begin{bmatrix}
+1\\
+1\\
+\end{bmatrix} + \begin{bmatrix}
+1\\
+1\\
+\end{bmatrix}0.05=\begin{bmatrix}
+1.05\\
+1.05
+\end{bmatrix}  
+\end{equation*}
+
+\begin{equation*}
+y_2=y_1+f(t_1,x_1)h=\begin{bmatrix}
+1.05\\
+1.05\\
+\end{bmatrix} + \begin{bmatrix}
+1.05\\
+\frac{1}{1.05}\\
+\end{bmatrix}0.05=\begin{bmatrix}
+1.1025\\
+1.0976190476190477 
+
+\end{bmatrix}  
+\end{equation*}
+
+Repitiendo el proceso sucesivamente obtenemos los siguientes resultados: 
+
+
+\begin{table}[H]
+    \centering
+    \setlength\extrarowheight{2.5pt}
+    
+    \begin{tabular}{|c|c|c|c|c|c}
+        \hline
+        \textbf{h} & {\textbf{$w_1(1)$}} & {\textbf{$w_2(1)$}}\\ 
+            \hline
+             1.05 & 1.05 & 1.05 \\
+             \hline
+              1.1 & 1.1025 & 1.0976190476190477  \\
+             \hline
+             1.15 & 1.1573809523809524 & 1.1429705215419501 \\
+             \hline
+              1.2 & 1.2145294784580498 & 1.1861715089930918 \\
+              \hline
+             1.25 & 1.2738380539077043 & 1.22733971518886 \\
+             \hline
+              1.3 & 1.3352050396671473 & 1.2665911725045031 \\
+              \hline
+             1.35 & 1.3985345982923725 & 1.304038604557684 \\
+             \hline
+              1.4 & 1.4637365285202566 & 1.339790312138641 \\
+              \hline
+             1.45 & 1.5307260441271886 & 1.3739494651185469 \\
+             \hline
+              1.5 & 1.599423517383116 & 1.4066137032373343 \\
+              \hline
+
+    \end{tabular}
+    
+    \caption{Valores obtenidos con el método de Euler}           
+\end{table}
 
 
 \subsection{Método de Euler para sistemas de ecuaciones de primer orden (Ejercicio práctico 1) }
@@ -706,13 +803,13 @@ y_2' = x''' = 2y_2 - 2y_1
 \end{cases}
 $$
 
-A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,$pi$/4] y l 25, 50 y 100 nodos. Los datos obtenidos general la siguiente gráfica: 
+A continuación pasaremos a resolver el sistema con el método de Euler. Para ello consideraremos el intervalo [0,$pi$/4] y 25, 50 y 100 nodos. Los datos obtenidos general la siguiente gráfica: 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.65]{img/graphic.png}
 \label{figura1}
-\caption{Aproximación para 25 (u1), 50 (u2) y 100 (u3) nodos} 
+\caption{Aproximación para 25 (w1), 50 (w2) y 100 (w3) nodos} 
 \end{figure}
 
 A continuación usaremos de nuevo el método de Euler para sistemas, pero esta vez para tamaños de paso menores, de forma que podamos ver la evolución del error según el número de nodos usado. Tras las ejecuciones los datos obtenidos son los siguientes:
