@@ -564,6 +564,30 @@ x_2=x_1+f(t_1,x_1)h=\begin{bmatrix}
 
 y así, sucesivamente.
 
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{2.5pt}
+        
+        \begin{tabular}{|c|c|c|c|c|c}
+            \hline
+            \textbf{h} & {\textbf{u(1)}} & \textbf{Error en u(1)} & {\textbf{v(1)}} & \textbf{Error en v(1)} \\ 
+            \hline
+                0.1 & 121.80076568601001 & 42.36156385459415 & 80.67749279719001 & 28.15092782792702\\
+            \hline
+                0.01 & 151.88087689408155 & 12.28145264652261 & 100.64386402726561 & 8.184556597851425\\
+            \hline
+                0.001 & 162.86047350606881 & 1.301856034535347 & 107.96082329609433 & 0.8675973290227\\
+            \hline
+                0.0001 & 164.0967915050743 & 0.065538035529868 & 108.78482056950256 & 0.043600055614476\\
+            \hline
+                0.00001 &  164.1557725938308 & 0.0065569467733723 &  108.82405852423639 & 0.0043621008806411\\
+            \hline
+        \end{tabular}
+        
+        \caption{Errores obtenidos con el método de Euler}           
+    \end{table}
+
+
 \subsection{Método de Euler para ecuaciones de orden superior}
  
 En primer lugar vamos a realizar el paso de una ecuación diferencial de orden superior a un sistema, sobre el cual posteriormente podremos aplicar el método de Euler para sistemas. Para ejemplificar el proceso vamos a usar el siguiente problema de valores iniciales: 
