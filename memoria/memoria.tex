@@ -562,13 +562,17 @@ x_2=x_1+f(t_1,x_1)h=\begin{bmatrix}
 
 y así, sucesivamente.
 
+Veamos las soluciones para distintos tamaños de paso, observando que, en efecto, cuanto menor es la h, menor es el error:
+
+	
+
     \begin{table}[H]
         \centering
         \setlength\extrarowheight{2.5pt}
         
         \begin{tabular}{|c|c|c|c|c|c}
             \hline
-            \textbf{h} & {\textbf{u(1)}} & \textbf{Error en u(1)} & {\textbf{v(1)}} & \textbf{Error en v(1)} \\ 
+            \textbf{h} & {\textbf{$w_1(1)$}} & \textbf{Error en $w_1(1)$} & {\textbf{$w_2(1)$}} & \textbf{Error en $w_2(1)$} \\ 
             \hline
                 0.1 & 121.80076568601001 & 42.36156385459415 & 80.67749279719001 & 28.15092782792702\\
             \hline
@@ -584,6 +588,20 @@ y así, sucesivamente.
         
         \caption{Errores obtenidos con el método de Euler}           
     \end{table}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[scale=0.65]{img/graphic2.png}
+    	\label{figura1}
+    	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
+    \end{figure}
+    
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[scale=0.65]{img/graphic3.png}
+    	\label{figura1}
+    	\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
+    \end{figure}
 
 
 \subsection{Método de Euler para ecuaciones de orden superior}
