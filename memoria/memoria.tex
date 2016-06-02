@@ -558,7 +558,7 @@ Si observamos, estos serían los resultados de los 20 pasos:
 	
 	\begin{tabular}{|c|c|c|c|c|c}
 		\hline
-		\textbf{h} & {\textbf{$w_1(1)$}} & {\textbf{$w_2(1)$}}\\ 
+		\textbf{$t_i$} & {\textbf{$w_1(t_i)$}} & {\textbf{$w_2(t_i)$}}\\ 
 		\hline
 	     0.05 & 1.5857142857142856 & 0.77749999999999997 \\
 		\hline
@@ -676,7 +676,7 @@ Repitiendo el proceso sucesivamente obtenemos los siguientes resultados:
     
     \begin{tabular}{|c|c|c|c|c|c}
         \hline
-        \textbf{h} & {\textbf{$w_1(1)$}} & {\textbf{$w_2(1)$}}\\ 
+        \textbf{$t_i$} & {\textbf{$w_1(t_i)$}} & {\textbf{$w_2(t_i)$}}\\ 
             \hline
              1.05 & 1.05 & 1.05 \\
              \hline
@@ -769,6 +769,59 @@ Como podemos observar, para tamaños de $h$ menores a $10^{-5}$, el error se dis
 \end{figure}
 
 Comcluímos ahora la importancia que tiene la elección correcta del tamaño del paso para obtener unas aproximaciones fiables. 
+
+\subsection{Aplicación del método de Euler para la ley de Hooke (Ejercicio teórico-práctico 4)}
+En este ejercicio vamos a aplicar el método de Euler para aproximar la ley de Hooke:
+
+$$ F = m\frac{\partial^2x}{\partial t^2}=-kx$$
+
+Donde m es la masa del cuerpo y x(t) la posición del cuerpo en el instante t y k la constante elástica del muelle, que e. Puesto que nos encontramos ante una ecuación de orden superior, en primer lugar obtendremos el sistema sobre el que podremos aplicar el método.
+
+$$
+\begin{cases}
+y_0' = x' = y_1\\
+y_1' = x'' = \frac{k}{m}y_0\\
+\end{cases}
+$$
+
+Ahora tan solo tendremos que aplicar el método de Euler al sistema. Lo aplicaremos para determinar la posición en el instante 0.5 de un cuerpo de masa m = 1 kg sobre un muelle con constante elástica  k = 3, para una longitud de paso h = 0.05 y con las siguiente condiciones iniciales:
+
+$$ x(0) = 0, x'(0) = 0.5 $$
+
+Los resultados obtenidos son los siguientes:
+
+    \begin{table}[H]
+        \centering
+        \setlength\extrarowheight{2.5pt}
+        
+        \begin{tabular}{|c|c|c|c|c|c}
+            \hline
+            \textbf{$t_i$} & {\textbf{$w(ti)$}}\\ 
+            \hline
+                0.05  &    0.025 \\
+                \hline
+                 0.1   &   0.05 \\
+                 \hline
+                0.15  &    0.0751875 \\
+                \hline
+                 0.2  &    0.10075 \\
+                 \hline
+                0.25  &    0.12687640625000002 \\
+                \hline
+                 0.3   &   0.1537584375 \\
+                 \hline
+                0.35  &    0.18159204179687502 \\
+                \hline
+             0.4   &   0.21057883437500002 \\
+             \hline
+             0.45  &    0.24092756726660158 \\
+             \hline
+             0.5   &   0.27285564141601565 \\
+             \hline
+        \end{tabular}
+        
+        \caption{Aproximación de la posición según la ley de Hooke}           
+    \end{table}
 
 \subsection{Método de Euler para sistemas de ecuaciones de primer orden (Ejercicio práctico 1)}
 
