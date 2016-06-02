@@ -159,11 +159,29 @@
 \begin{frame}
 	\frametitle{Partes del trabajo:}
 	\begin{itemize}
+		\item Definiciones previas
 		\item Descripción general de un sistema de ecuaciones diferenciales
 		\item Ecuaciones diferenciales de orden superior y reescritura como sistemas.
 		\item Método de Euler para sistemas de ecuaciones diferenciales
 		\item Estudio del error y análisis de la convergencia del método.
 		\item Ejemplos
+		
+	\end{itemize}
+\end{frame}
+
+\section{Definiciones previas}
+\begin{frame}
+	\frametitle{Definiciones previas}
+	
+	\begin{itemize}
+		\item Consistencia: Un método se dice consistente si el error local que produce tiende a 0 cuando $h$ (tamaño de paso) tienda a 0.
+		$$ \lim_{h \rightarrow 0} max | \tau_i(h) | \rightarrow 0 $$
+		
+		\item Estabilidad: Un método se dice que es estable si una perturbación en los datos de entrada no se va maximizando cuando se utiliza el método para obtener la solución del problema. 
+		
+		 $$|\omega' - \omega| \leq K|X'_0 - X_0|$$.
+		
+		\item La consistencia y la estabilidad de un método implican su convergencia.
 		
 	\end{itemize}
 \end{frame}
@@ -212,7 +230,7 @@
 	\end{cases}
 	$$
 	
-	PVI y PBP análogos a los anteriores.
+	PVI análogo.
 \end{frame}
 
 \begin{frame}
@@ -235,7 +253,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Notación vectorial}
+    \frametitle{Sistemas de primer orden}
 	El sistema anterior lo podemos notar en forma vectorial de la siguiente manera:\\~\\
 
 	$$ X'[t] = F(t, X[t]), \quad 
@@ -249,6 +267,20 @@
     \vdots \\
     f_n(t, X[t])
     \end{bmatrix} $$
+    
+    Está bien planteado si satisface las condiciones anteriormente dichas.
+    Ahora, indicar que tenemos una caracterización de problema bien planteado a partir de la condición de Lipschitz.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Problema bien planteado}
+	
+	 Diremos que la función vectorial $F(t, X(t))$ satisface la condición de Lipschitz, con constante de Lipschitz $L$, si se cumple que $\forall t_1, t_2 \in [a,b]$ se cumple:
+	 
+	 $$ ||F(t_1, X(t_1)) - F(t_2, X(t_2))|| \leq L||X(t_1) - X(t_2)||$$
+	 
+	 Tenemos entonces que el problema anterior es un problema bien planteado si $F (t, X(t))$ es continua en su conjunto de definición y Lipschitziana.
+	 
 \end{frame}
 
 \section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
@@ -605,18 +637,6 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{img/grafica2.png}
-		\label{figura1}
-		\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
-	\end{figure}
-	
-\end{frame}
-
-\begin{frame}
-	\frametitle{Método de Euler para sistemas de ecuaciones de primer orden}
-	
-	\begin{figure}[H]
-		\centering
 		\includegraphics[scale=0.4]{img/grafica3.png}
 		\label{figura1}
 		\caption{Aproximación para marcas de paso de 0.1, 0.05 y 0.01 respectivamente} 
@@ -655,9 +675,9 @@ $$
 
 	\begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{img/graphic.png}
+	\includegraphics[scale=0.45]{img/grafica1.png}
 	\label{figura1}
-	\caption{Aproximación para 25 (u1), 50 (u2) y 100 (u3) nodos} 
+	\caption{Aproximación para 25 (w1), 50 (w2) y 100 (w3) nodos} 
 	\end{figure}
 
 
@@ -673,7 +693,7 @@ $$
         
         \begin{tabular}{|c|c|c|c|c}
             \hline
-            \textbf{h} & {\textbf{u($\pi$/4)}} & \textbf{Error} \\ 
+            \textbf{h} & {\textbf{w($\pi$/4)}} & \textbf{Error} \\ 
             \hline
                 $\pi$/120 & 1.581351427438043 & 0.030468230520017\\
             \hline
