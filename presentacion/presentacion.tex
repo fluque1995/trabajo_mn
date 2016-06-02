@@ -179,7 +179,7 @@
 		
 		\item Estabilidad: Un método se dice que es estable si una perturbación en los datos de entrada no se va maximizando cuando se utiliza el método para obtener la solución del problema. 
 		
-		 $$|\omega' - \omega| \leq K|X'_0 - X_0|$$.
+		 $$|\omega' - \omega| \leq K|X'_0 - X_0|$$
 		
 		\item La consistencia y la estabilidad de un método implican su convergencia.
 		
@@ -199,7 +199,7 @@
 	
 	\textit{Orden} de la ecuación diferencial: mayor orden de derivación de la variable independiente que aparece en dicha ecuación.\\~\\
 	
-	\textit{Solución} Conjunto de ecuaciones que cumplan dichas condiciones.
+	\textit{Solución:} conjunto de ecuaciones que cumplan dichas condiciones.
 \end{frame}
 
 \subsection{PVI}
@@ -306,7 +306,7 @@
 	y_1' = x'' = y_2\\
 	\vdots\\
 	y_{n-2}' = x^{n-1)} = y_{n-1}\\
-	y_{n-1}' = x^{n)} = F(t, y_1, y_2, \dots, y_{n-1})
+	y_{n-1}' = x^{n)} = G(t,y_0, y_1, y_2, \dots, y_{n-1})
 	\end{cases}
 	$$
 	
@@ -456,10 +456,10 @@
 	El error local para el método de Euler es $O(h^2)$, donde $h$ es el tamaño del paso que hemos elegido para aplicar el método.
 	\end{block}
 	
-	Para la demostración, supongamos que tenemos un valor exacto para un determinado $t_i$, entonces el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + h*F(t_i, X_i)] ||$
+	Para la demostración, supongamos que tenemos un valor exacto para un determinado $t_i$, entonces el error local para la siguiente iteración es $|| E_{i+1} || = ||X(t_{i+1}) - [X(t_{i}) + hF(t_i, X_i)] ||$
 	
 	Si tomamos cada componente por separado y, además, realizamos el desarrollo de Taylor de $x_j(t_{i+1})$ con $j=1,...,n$, llegaríamos a que para cada $x_j$, el error cometido en un paso del método es:
-	$$ e_{i+1, j} = | x_j(t_{i+1}) - \omega_{i+1, j} | = \frac{h^2}{2}*x''_j(\xi_{i+1, j}),\, \xi_{i+1, j} \in [t_i, t_{i+1}] $$	
+	$$ e_{i+1, j} = | x_j(t_{i+1}) - \omega_{i+1, j} | = \frac{h^2}{2}x''_j(\xi_{i+1, j}),\, \xi_{i+1, j} \in [t_i, t_{i+1}] $$	
 	
 \end{frame}
 
@@ -474,9 +474,9 @@
 	\vdots \\
 	e_{i+1, n}
 	\end{bmatrix}=\begin{bmatrix}
-	\frac{h^2}{2}*x''_1(\xi_{i+1, 1}) \\
+	\frac{h^2}{2}x''_1(\xi_{i+1, 1}) \\
 	\vdots \\
-	\frac{h^2}{2}*x''_n(\xi_{i+1, n})
+	\frac{h^2}{2}x''_n(\xi_{i+1, n})
 	\end{bmatrix}
 	\end{equation*}
 	
@@ -525,11 +525,11 @@
 	Teniendo en cuenta el desarrollo de Taylor para $x_j(t_{i+1})$ y la aproximación $w_{i+1,j}$:
 	
 	$$
-	x_j(t_{i+1}) - \omega_{i+1,j} = x_j(t_i) - \omega_{i,j} + h*[f_j(t_i, x_i, ..., x_n) $$
-	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})] + \frac{h^2}{2}*x''_j(\xi_j) $$
+	x_j(t_{i+1}) - \omega_{i+1,j} = x_j(t_i) - \omega_{i,j} + h[f_j(t_i, x_i, ..., x_n) $$
+	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})] + \frac{h^2}{2}x''_j(\xi_j) $$
 	Se cumple entonces que:
 	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq | x_j(t_i) - \omega_{i,j} | + h|[f_j(t_i, x_i, ..., x_n) $$
-	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})]| + \frac{h^2}{2}*|x''_j(\xi_j)| $$
+	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})]| + \frac{h^2}{2}|x''_j(\xi_j)| $$
 	
 \end{frame}
 
@@ -537,7 +537,7 @@
 	\frametitle{Error global}
 	Y de aquí, teniendo en cuenta que $f_j$ es Lipschitziana:
 	
-	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq (1+hL_j)*| x_j(t_i) - \omega_{i,j} | + \frac{h^2*M_j}{2} $$
+	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq (1+hL_j)| x_j(t_i) - \omega_{i,j} | + \frac{h^2M_j}{2} $$
 	
 	Y aplicando el lema anterior y operando:
 	
@@ -577,8 +577,8 @@
 		
 		$$
 		\begin{cases}
-		x' = 2*x + 3 * y\\
-		y' = 2*x + y \\
+		x' = 2x + 3y\\
+		y' = 2x + y \\
 		x(0) = 4\\
 		y(0)=1
 		\end{cases}
