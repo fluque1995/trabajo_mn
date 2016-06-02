@@ -118,7 +118,7 @@
 %   TÍTULO
 %----------------------------------------------------------------------------------------
 
-\title[Método de Euler para sist. de ecuaciones]{Método de Euler para sistemas de ecuciones diferenciales} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Método de Euler para sist. de ecuaciones]{Método de Euler para sistemas de ecuaciones diferenciales} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{María del Mar Ruiz Martín\\
         Antonio R. Moya Martín-Castaño\\
@@ -146,9 +146,11 @@
 \begin{frame}
   \frametitle{Introducción}
    % Table of contents slide, comment this block out to remove it
-  Explicaremos el método de Euler para sistemas de ecuaciones diferenciales de primer orden. Por consiguiente, también servirá para resolver ecuaciones de orden superior. Este método no dejará de ser una extensión del método de Euler para ecuaciones diferenciales. \\
+  Explicaremos el método de Euler para sistemas de ecuaciones diferenciales de primer orden. Por consiguiente, también servirá para resolver ecuaciones de orden superior.\\~\\
   
-  Cabe nombrar que en la práctica no será muy utilizado, pues no aporta soluciones lo suficientemente buenas, es interesante su conocimiento por su gran simplicidad.
+  Poco utilizado en la práctica, no aporta soluciones lo suficientemente buenas.\\~\\
+
+  Interesante por su gran simplicidad.
   
 \end{frame}
 
@@ -161,6 +163,7 @@
 		\item Ecuaciones diferenciales de orden superior y reescritura como sistemas.
 		\item Método de Euler para sistemas de ecuaciones diferenciales
 		\item Estudio del error y análisis de la convergencia del método.
+		\item Ejemplos
 		
 	\end{itemize}
 \end{frame}
@@ -170,27 +173,27 @@
 \begin{frame}
 	\frametitle{Concepto de ecuación diferencial:}
 	
-	Es una igualdad en la que interviene una variable independiente (\texttt{t}), una variable dependiente (x(\texttt{t})) y las sucesivas derivadas de la variable dependiente respecto de la independiente. de forma general, escribimos: 
+	Igualdad en la que interviene una variable independiente (\texttt{t}), una variable dependiente (x(\texttt{t})) y las sucesivas derivadas de la variable dependiente respecto de la independiente:
 	
 	$$
 	F(t,x,x', ..., x^{n)})=0
 	$$
 	
-	También, nombrar que se definía \textit{orden} de la ecuación diferencial, como el mayor orden de derivación de la variable independiente que aparece en dicha ecuación.\\
+	\textit{Orden} de la ecuación diferencial: mayor orden de derivación de la variable independiente que aparece en dicha ecuación.\\~\\
 	
-	La \textit{solución} vendrá dada por un conjunto de ecuaciones que cumplan dichas condiciones.
+	\textit{Solución} Conjunto de ecuaciones que cumplan dichas condiciones.
 \end{frame}
 
 \subsection{PVI}
 \begin{frame}
 	\frametitle{Problema de valores iniciales}
-	Se define un problema de valores iniciales (PVI), asociado a una ecuación diferencial a dicha ecuación, y el conjunto de $n$ valores (fijado $t_0$):
+	\textit{PVI} asociado a una ecuación diferencial: dicha ecuación junto con el conjunto de $n$ valores (fijado $t_0$):
 	
 	$$
 	x(t_0)=y_0, x'(t_0)=y_1, ...,  x^{n-1)}(t_0)=y_{n-1}
 	$$
 	
-	Se dice que está \textit{bien planteado} si existe solución, es única y depende continuamente de los datos del problema.
+	\textit{Problema bien planteado}: existe solución, es única y depende continuamente de los datos del problema.
 	
 \end{frame}
 
@@ -209,12 +212,13 @@
 	\end{cases}
 	$$
 	
-	Y de manera análoga a como hemos dicho anteriormente, podemos definir un PVI para este sistema.
+	PVI y PBP análogos a los anteriores.
 \end{frame}
 
 \begin{frame}
 	\frametitle{Sistemas de primer orden}
-	Dado que trabajaremos con sistemas de primer orden, a partir de ahora notaremos los sistemas del siguiente modo:
+
+	Las derivadas que aparecen son a lo sumo de orden 1.\\~\\
 	
 	$$
 	\begin{cases}
@@ -230,23 +234,39 @@
 	$$ x_1(t_0) = y_1, x_2(t_0) = y_2, ..., x_m(t_0) = y_m $$
 \end{frame}
 
+\begin{frame}
+	\frametitle{Notación vectorial}
+	El sistema anterior lo podemos notar en forma vectorial de la siguiente manera:\\~\\
+
+	$$ X'[t] = F(t, X[t]), \quad 
+	X[t] = \begin{bmatrix}
+    x_1(t) \\
+    \vdots \\
+    x_n(t)
+    \end{bmatrix}, \quad
+    F[t, X[t]] = \begin{bmatrix}
+    f_1(t, X[t]) \\
+    \vdots \\
+    f_n(t, X[t])
+    \end{bmatrix} $$
+\end{frame}
+
 \section{Ecuaciones diferenciales de orden superior y reescritura como sistemas}
 \subsection{Reescritura}
 \begin{frame}
 	\frametitle{Reescritura de ecuaciones de orden superior}
-Anteriormente hemos definido que es una ecuación diferencial de orden $n$. Ahora, veremos como reescribir una ecuación diferencial de orden n (con n>1), como un sistema:
 
-Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Podemos establecer los siguientes cambios de variable:
+	Sea la ecuación diferencial de orden $n$: $ F(t, x, x', ..., x^{n)}) = 0 $. Cambios de variable:
 
-$$y_0 = x, y_1 = x', y_2 = x'', \dots, y_{n-1} = x^{n-1)}$$
+	$$y_0 = x, y_1 = x', y_2 = x'', \dots, y_{n-1} = x^{n-1)}$$\\~\\
 
-Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la solución de nuestra ecuación diferencial.
+	Solución de $y_0$ del sistema $\rightarrow$ solución de la ecuación diferencial.
 
 \end{frame}
 
 \begin{frame}
 	
-	Así, el sistema en el que hemos transformado la ecuación de orden $n$ sería el siguiente:
+	Sistema en el que hemos transformado la ecuación de orden $n$ sería el siguiente:
 	
 	$$
 	\begin{cases}
@@ -265,8 +285,7 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 \begin{frame}
 	\frametitle{Método de Euler para ecuaciones diferenciales}
 	
-	Antes de comentar el método de Euler para sistemas, recordemos en qué consistía el método de Euler para ecuaciones diferenciales. Dado un PVI bien planteado:
-	
+	Dado un PVI bien planteado:
 	$$
 	\begin{cases}
 	y'(t)=f(t,y(t)) \\ 
@@ -274,30 +293,26 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 	\end{cases}
 	$$
 	
-	si tomamos puntos en un intervalo [a,b], y tomamos un N natural, de forma que $h=(b-a)/n$
-	Para cada $i=0,...,N$, tomamos los puntos:
-	$t_i=a+ih$. Aplicando Taylor (centrado en $t_i$):
-	
-	
+	Dado [a,b], tomamos $N \in \mathbb{N}$, y $h=(b-a)/N$\\~\\
+	Para cada $i=0,...,N$, tomamos los puntos: $t_i=a+ih$.
 	
 \end{frame}
 
 \begin{frame}
 	\frametitle{Método de Euler para ecuaciones diferenciales}
-	$$
-	y(t_{i+1})=y(t_i) + y'(t_i)(t_{i+1}-t_i) + y''(\xi_i)(t_{i+1}-t_i)^2/2
-	$$ para algún $\xi_i$ entre $(t_i, ti_{i+1})$.\\
+	Aplicando Taylor (centrado en $t_i$):
+
+	$$y(t_{i+1})=y(t_i) + y'(t_i)(t_{i+1}-t_i) + y''(\xi_i)(t_{i+1}-t_i)^2/2$$ 
+
+	para algún $\xi_i$ en $(t_i, ti_{i+1})$.\\~\\
+	
 	Equivalentemente:
 	
-	$$
-	y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + y''(\xi_i)h^2/2,
-	$$
+	$$y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + y''(\xi_i)h^2/2$$
 	
 	Es decir: 
 	
-	$$
-	y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + O(h^2).
-	$$ 
+	$$y(t_{i+1})=y(t_i) + f(t_i,y(t_i))h + O(h^2)$$ 
 	
 \end{frame}
 
@@ -389,6 +404,19 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 \end{frame}
 
 \section{Estudio del error y análisis de la convergencia del método}
+
+\subsection{Tipos de errores}
+\begin{frame}
+	\frametitle{Tipos de errores en los métodos de resolución numérica}
+
+	\begin{itemize}
+	\item Error local
+	\item Error global
+	\item Error de truncatura
+	\end{itemize}
+
+\end{frame}
+
 \subsection{Error local}
 \begin{frame}
 	\frametitle{Error local}
@@ -471,8 +499,6 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 	$$ | x_j(t_{i+1}) - \omega_{i+1,j} | \leq | x_j(t_i) - \omega_{i,j} | + h|[f_j(t_i, x_i, ..., x_n) $$
 	$$- f_j(t_i, \omega_{i,1}, ..., \omega_{i,n})]| + \frac{h^2}{2}*|x''_j(\xi_j)| $$
 	
-	
-	
 \end{frame}
 
 \begin{frame}
@@ -487,6 +513,26 @@ Y con estas, la solución de $y_0$ en el sistema que queremos escribir, será la
 	Y dado que tomamos $j$ arbitrario, tenemos este resultado para todas las funciones $f_j$. Finalmente, tomando la norma euclídea de todos los errores globales, podemos concluir que el método es de orden $O(h)$.
 \end{frame}
 
+\subsection{Error de truncatura}
+\begin{frame}
+	\frametitle{Error de truncatura}
+
+	Errores derivados de la precisión con la que trabaja la máquina en la que calculamos.\\~\\
+
+	Este error provoca que se aumente el error total para valores de $h$ demasiado pequeños.
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ejemplo del error de truncatura}
+
+		Se ha cambiado la precisión de la máquina para que trabaje con 6 decimales significativos.
+		\begin{figure}
+		\centering
+		\includegraphics[scale=0.4]{img/graph_error_comb}
+		\end{figure}
+
+\end{frame}
 
 \section{Ejercicios}
 
